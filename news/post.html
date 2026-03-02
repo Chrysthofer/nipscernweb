@@ -62,20 +62,32 @@
       <span data-i18n="common.loading">Loading…</span>
     </div>
 
+    <!-- Cover image (populated by JS) -->
+    <div id="post-cover" style="display:none;max-width:720px;margin:0 auto var(--sp-8);padding:0 var(--container-pad)"></div>
+
     <!-- Post body -->
     <div class="post-body" id="post-body" style="display:none"></div>
 
-    <!-- Post footer / related -->
-    <div id="post-footer" style="display:none;border-top:1px solid var(--border-subtle);padding:var(--sp-12) var(--container-pad)">
+    <!-- Related articles (populated by JS) -->
+    <div id="post-related" style="display:none;border-top:1px solid var(--border-subtle);padding:var(--sp-8) var(--container-pad)">
+      <div style="max-width:720px;margin:0 auto">
+        <p style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:var(--sp-4)">Related</p>
+        <div id="post-related-list" style="display:flex;flex-direction:column;gap:var(--sp-3)"></div>
+      </div>
+    </div>
+
+    <!-- Post footer / share -->
+    <div id="post-footer" style="display:none;border-top:1px solid var(--border-subtle);padding:var(--sp-8) var(--container-pad)">
       <div style="max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-4)">
         <a href="index.html" class="btn btn-ghost" data-i18n="news.back">
           <i class="ph ph-arrow-left" aria-hidden="true"></i>
           Back to News
         </a>
         <div style="display:flex;align-items:center;gap:var(--sp-2)">
-          <span style="font-size:var(--text-sm);color:var(--text-muted)" data-i18n="news.share">Share</span>
-          <button onclick="navigator.share && navigator.share({title: document.title, url: window.location.href})" class="btn btn-ghost btn-sm" aria-label="Share this post">
-            <i class="ph ph-share-network" aria-hidden="true"></i>
+          <span id="share-toast" style="font-size:var(--text-xs);color:var(--accent-cgv);display:none;font-weight:600">Link copied!</span>
+          <button id="share-btn" class="btn btn-ghost btn-sm" aria-label="Copy link to this post">
+            <i class="ph ph-link" aria-hidden="true"></i>
+            Copy link
           </button>
         </div>
       </div>
@@ -89,6 +101,7 @@
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
   </div>
+  <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
 
@@ -141,6 +154,18 @@
       document.getElementById('post-excerpt').textContent = post.excerpt;
       document.getElementById('post-header').style.display = 'block';
 
+      // Cover image
+      if (post.image) {
+        const coverEl = document.getElementById('post-cover');
+        const img = document.createElement('img');
+        img.src = '../' + post.image;
+        img.alt = post.title;
+        img.style.cssText = 'width:100%;max-height:460px;object-fit:cover;display:block;border-radius:var(--r-xl)';
+        img.loading = 'eager';
+        coverEl.appendChild(img);
+        coverEl.style.display = 'block';
+      }
+
       // Render body
       const bodyEl = document.getElementById('post-body');
       const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
@@ -170,7 +195,62 @@
         bodyEl.innerHTML += `<div class="pub-tags" style="margin-top:var(--sp-8)">${post.tags.map(t => `<span class="pub-tag">${t}</span>`).join('')}</div>`;
       }
 
+      // Related articles
+      if (post.related_ids && post.related_ids.length) {
+        const relatedPosts = post.related_ids.map(rid => posts.find(p => p.id === rid)).filter(Boolean);
+        if (relatedPosts.length) {
+          const listEl = document.getElementById('post-related-list');
+          relatedPosts.forEach(rp => {
+            const a = document.createElement('a');
+            a.href = 'post.html?id=' + rp.id;
+            a.style.cssText = 'display:flex;gap:var(--sp-3);align-items:center;padding:var(--sp-3) var(--sp-4);background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-lg);text-decoration:none;transition:border-color 0.15s';
+            a.onmouseover = () => { a.style.borderColor = 'var(--border-mid)'; };
+            a.onmouseout  = () => { a.style.borderColor = 'var(--border-subtle)'; };
+            const badgeEl = document.createElement('span');
+            badgeEl.className = 'badge ' + catClass(rp.category);
+            badgeEl.style.flexShrink = '0';
+            badgeEl.textContent = rp.category;
+            const titleEl = document.createElement('span');
+            titleEl.style.cssText = 'font-size:var(--text-sm);color:var(--text-primary);flex:1;line-height:1.4';
+            titleEl.textContent = rp.title;
+            const arrow = document.createElement('i');
+            arrow.className = 'ph ph-arrow-right';
+            arrow.style.cssText = 'color:var(--text-muted);flex-shrink:0';
+            a.appendChild(badgeEl);
+            a.appendChild(titleEl);
+            a.appendChild(arrow);
+            listEl.appendChild(a);
+          });
+          document.getElementById('post-related').style.display = 'block';
+        }
+      }
+
       document.getElementById('post-footer').style.display = 'block';
+
+      // Share button — copy link to clipboard
+      const shareBtn = document.getElementById('share-btn');
+      const shareToast = document.getElementById('share-toast');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          const url = window.location.href;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(() => showToast());
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.cssText = 'position:fixed;opacity:0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast();
+          }
+        });
+        function showToast() {
+          shareToast.style.display = 'inline';
+          setTimeout(() => { shareToast.style.display = 'none'; }, 2500);
+        }
+      }
     }
 
     document.addEventListener('DOMContentLoaded', loadPost);

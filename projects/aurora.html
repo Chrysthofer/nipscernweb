@@ -55,7 +55,7 @@
     <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(244,63,94,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="aurora-title">
       <div class="project-hero-inner">
         <div class="project-hero-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)">
-          <i class="ph ph-window" aria-hidden="true"></i>
+          <i class="ph ph-app-window" aria-hidden="true"></i>
         </div>
         <div class="project-hero-text">
           <div class="eyebrow fade-up">
@@ -90,7 +90,7 @@
     <!-- Badge bar -->
     <div style="background:var(--bg-card);border-bottom:1px solid var(--border-subtle);padding:var(--sp-4) var(--container-pad)">
       <div style="max-width:var(--container-max);margin:0 auto;display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
-        <span class="badge badge-red"><i class="ph ph-windows-logo" aria-hidden="true"></i>&nbsp;Windows Only</span>
+        <span class="badge badge-red"><i class="ph ph-app-windows-logo" aria-hidden="true"></i>&nbsp;Windows Only</span>
         <span class="badge badge-red">Electron</span>
         <span class="badge badge-gray">v4.27.10 — Final Release</span>
         <span class="badge badge-gray">25 Releases</span>
@@ -221,6 +221,7 @@
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
   </div>
+  <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
   <script type="module" src="../assets/js/main.js"></script>

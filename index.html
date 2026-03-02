@@ -85,14 +85,9 @@
          ====================================================== -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true">
-        <!-- ATLAS-inspired detector cross-section rings -->
-        <div class="hr-1"></div>
-        <div class="hr-2"></div>
-        <div class="hr-3"></div>
-        <div class="hr-4"></div>
-        <div class="hr-5"></div>
-        <!-- Interaction-point glow -->
-        <div class="hero-ip"></div>
+        <div class="hero-ring"></div>
+        <div class="hero-orb-wrap"><div class="hero-orb"></div></div>
+        <div class="hero-orb-wrap hero-orb-wrap--b"><div class="hero-orb"></div></div>
       </div>
       <div class="hero-content">
         <div class="hero-label" aria-label="Federal University of Juiz de Fora and CERN collaboration">
@@ -513,6 +508,7 @@
       <div class="vw-plugin-top-wrapper"></div>
     </div>
   </div>
+  <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
 
@@ -525,38 +521,21 @@
   <!-- Main module -->
   <script type="module" src="assets/js/main.js"></script>
 
-  <!--
-    VIEW COUNTER — GoatCounter (https://www.goatcounter.com)
-    Setup (free, 30 seconds):
-      1. Sign up at goatcounter.com and choose the account code "nipscern"
-      2. In GoatCounter settings → API → create a read-only token
-      3. In GoatCounter settings → "Make statistics public" (optional, needed for the count display)
-      4. The script below handles both tracking and the discrete counter display.
-  -->
-  <script data-goatcounter="https://nipscern.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+  <script data-goatcounter="https://nipscern.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
   <script>
-    // Discrete view counter — loads total hits from GoatCounter public API.
-    // Works once GoatCounter is set up and "public statistics" is enabled.
     (function () {
       const el = document.getElementById('view-count');
       const wrap = document.getElementById('hero-viewcount');
       if (!el || !wrap) return;
-
-      fetch('https://nipscern.goatcounter.com/api/v0/stats/pages' +
-            '?limit=1&start=2020-01-01&end=2099-12-31&filter=%2F')
+      fetch('https://nipscern.goatcounter.com/api/v0/stats/pages?limit=1&start=2020-01-01&end=2099-12-31&filter=%2F')
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (data) {
           var count = data && data.pages && data.pages[0] && data.pages[0].count;
-          if (count != null) {
-            el.textContent = Number(count).toLocaleString();
-            wrap.removeAttribute('hidden');
-          }
+          if (count != null) { el.textContent = Number(count).toLocaleString(); wrap.removeAttribute('hidden'); }
         })
-        .catch(function () { /* silently ignore — counter hidden by default */ });
+        .catch(function () {});
     })();
   </script>
-  <script data-goatcounter="https://nipscern.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

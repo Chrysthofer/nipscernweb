@@ -268,6 +268,17 @@ function buildShells(scene) {
   beamLine.userData.isBeamAxis = true;
   beamLine.visible = false;
   scene.add(beamLine);
+
+  // Z-axis north indicator — red cone at +Z end (always visible)
+  const zConeMat = new THREE.MeshBasicMaterial({ color: 0xff2222 });
+  const zConeGeo = new THREE.ConeGeometry(0.12, 0.42, 14);
+  const zCone    = new THREE.Mesh(zConeGeo, zConeMat);
+  // ConeGeometry points along +Y by default; rotate -90° around X → points along +Z
+  zCone.rotation.x = -Math.PI / 2;
+  // Position so the cone base sits at z≈8.0 and tip points outward
+  zCone.position.set(0, 0, 8.21);
+  zCone.userData.isZNorth = true;
+  scene.add(zCone);
 }
 
 // ============================================================

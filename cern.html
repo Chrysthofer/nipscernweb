@@ -19,16 +19,6 @@
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icons/favicon.png" type="image/png">
 
-  <!-- Three.js importmap (required for CGV preview) -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
@@ -275,8 +265,8 @@
     <!-- MEDIA — ATLAS overview image/video placeholder -->
     <div style="background:var(--bg-0);padding:0 var(--container-pad) var(--sp-12)">
       <div style="max-width:var(--container-max);margin:0 auto">
-        <figure class="cern-img fade-up" style="max-height:480px">
-          <img src="assets/images/cern/atlas-cutaway.png" alt="ATLAS detector cutaway — showing all subsystems from the beam pipe outwards" loading="lazy" style="max-height:480px;object-fit:contain;background:var(--bg-elevated)">
+        <figure class="cern-img fade-up" style="max-height:480px;background:transparent;border:none">
+          <img src="assets/images/cern/atlas-cutaway.png" alt="ATLAS detector cutaway — showing all subsystems from the beam pipe outwards" loading="lazy" style="max-height:480px;object-fit:contain;border-radius:var(--r-xl)">
           <figcaption>ATLAS detector cutaway — all subsystems from inner tracking to muon spectrometer</figcaption>
         </figure>
       </div>
@@ -502,52 +492,6 @@
             <img src="assets/images/cern/lar-accordion.jpg" alt="LAr calorimeter accordion-shaped absorber structure" loading="lazy" style="aspect-ratio:4/3;object-fit:cover">
             <figcaption>LAr electromagnetic calorimeter — accordion lead/stainless steel absorbers in liquid argon at 87 K</figcaption>
           </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================
-         CGV PREVIEW
-         ====================================================== -->
-    <section class="cgv-section section" aria-labelledby="cgv-cern-title">
-      <div class="cgv-container">
-        <div class="cgv-header fade-up">
-          <div class="eyebrow" style="justify-content:center">
-            <i class="ph ph-cube" aria-hidden="true"></i>
-            CGV-WEB
-          </div>
-          <h2 class="display-md" id="cgv-cern-title">Interactive Calorimeter Geometry</h2>
-          <p class="body-lg" style="max-width:520px;margin:var(--sp-4) auto 0">
-            TileCal, LAr, and HEC geometry rendered cell-by-cell in the browser. Rotate, zoom, generate events, toggle layers.
-          </p>
-        </div>
-
-        <div class="cgv-canvas-wrapper fade-up" id="cgv-canvas-wrapper" role="img" aria-label="Interactive 3D ATLAS calorimeter display">
-          <canvas id="cgv-canvas" aria-hidden="true"></canvas>
-          <div class="cgv-loading" id="cgv-loading" aria-live="polite">
-            <div class="cgv-spinner" aria-hidden="true"></div>
-            <span data-i18n="home.cgv.loading">Initialising calorimeter geometry…</span>
-          </div>
-          <div class="cgv-cell-count" aria-live="polite" aria-label="Active cells">
-            <span id="cgv-cell-count">0</span>
-            <span style="margin-left:4px;color:var(--text-muted)" data-i18n="home.cgv.cells_label">active cells</span>
-          </div>
-          <a href="https://nipscern.com/projects/cgv" target="_blank" rel="noopener"
-             class="btn btn-ghost btn-sm cgv-open-btn" data-i18n="home.cgv.btn_fullcgv">
-            <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
-            Open Full CGV
-          </a>
-          <div class="cgv-controls" role="toolbar" aria-label="Calorimeter controls">
-            <button class="cgv-btn" id="cgv-btn-event" data-i18n="home.cgv.btn_event">Generate Event</button>
-            <div class="cgv-divider" aria-hidden="true"></div>
-            <button class="cgv-btn" id="cgv-btn-wire" data-i18n="home.cgv.btn_wireframe">Wireframe</button>
-            <div class="cgv-divider" aria-hidden="true"></div>
-            <button class="cgv-btn" id="cgv-btn-beam" data-i18n="home.cgv.btn_beam">Beam Axis</button>
-            <div class="cgv-divider" aria-hidden="true"></div>
-            <button class="cgv-btn active" id="cgv-btn-tilecal" aria-pressed="true">TileCal</button>
-            <button class="cgv-btn active" id="cgv-btn-lar" aria-pressed="true">LAr</button>
-            <button class="cgv-btn active" id="cgv-btn-hec" aria-pressed="true">HEC</button>
-          </div>
         </div>
       </div>
     </section>
@@ -974,14 +918,10 @@
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
   </div>
+  <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
 
-  <!-- CGV Preview -->
-  <script type="module">
-    import { initCGVPreview } from './assets/js/cgv-preview.js';
-    document.addEventListener('DOMContentLoaded', () => initCGVPreview('cgv-canvas-wrapper'));
-  </script>
   <script type="module" src="assets/js/main.js"></script>
 
   <!-- LHC Status widget (schedule-based, no external API required) -->

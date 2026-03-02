@@ -73,7 +73,7 @@ function buildNav() {
   return `
     <div class="nav-inner">
       <a href="${ROOT}index.html" class="nav-logo" aria-label="NIPSCERN Home">
-        <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+        <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
         <span class="nav-logo-text">NIPSCERN</span>
       </a>
 
@@ -95,7 +95,7 @@ function buildNav() {
     <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="nav-mobile-header">
         <a href="${ROOT}index.html" class="nav-logo">
-          <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+          <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
           <span class="nav-logo-text">NIPSCERN</span>
         </a>
         <button id="nav-mobile-close" aria-label="Close menu" style="width:40px;height:40px;border-radius:8px;background:var(--border-subtle);border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;color:var(--text-secondary)">
@@ -163,7 +163,7 @@ function buildFooter() {
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+          <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
           <span style="font-size:var(--text-base);font-weight:700;letter-spacing:0.06em">NIPSCERN</span>
         </div>
         <p class="footer-tagline" data-i18n="footer.tagline">Research and Development Laboratory at UFJF, Brazil — in collaboration with CERN, Geneva.</p>
@@ -207,10 +207,19 @@ function buildFooter() {
 
     <div class="footer-bottom">
       <p data-i18n="footer.copyright">© 2025 NIPSCERN — Federal University of Juiz de Fora. All rights reserved.</p>
-      <div class="footer-social">
-        <a href="https://github.com/nipscernlab" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub">
-          <i class="ph ph-github-logo" aria-hidden="true" style="font-size:18px"></i>
-        </a>
+      <div style="display:flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:var(--sp-3);font-size:var(--text-xs);color:var(--text-muted)">
+          <a href="${ROOT}credits.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">Credits</a>
+          <span aria-hidden="true">·</span>
+          <a href="${ROOT}terms.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">Terms</a>
+          <span aria-hidden="true">·</span>
+          <a href="${ROOT}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">Privacy</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/nipscernlab" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="ph ph-github-logo" aria-hidden="true" style="font-size:18px"></i>
+          </a>
+        </div>
       </div>
     </div>
   `;

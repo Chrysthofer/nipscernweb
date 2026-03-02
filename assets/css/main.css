@@ -344,8 +344,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-logo-mark {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: var(--r-md);
   display: flex;
   align-items: center;
@@ -927,140 +927,51 @@ h1, h2, h3, h4, h5, h6 {
     radial-gradient(ellipse 65% 55% at 50% 50%, rgba(91,156,246,0.04) 0%, transparent 80%);
 }
 
-/* ── ATLAS-inspired detector rings ─────────────────────────── */
-/* All rings share base positioning */
-.hr-1, .hr-2, .hr-3, .hr-4, .hr-5 {
+/* ── Ring + two orbiting balls ──────────────────────────────── */
+.hero-ring {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
+  border: 1px solid rgba(91,156,246,0.18);
   pointer-events: none;
 }
 
-/* Beam pipe / innermost tracker — brightest, thicker */
-.hr-1 {
-  width: 130px;
-  height: 130px;
-  border: 1.5px solid rgba(91,156,246,0.32);
-}
-/* Inner Detector */
-.hr-2 {
-  width: 310px;
-  height: 310px;
-  border: 1px solid rgba(91,156,246,0.18);
-}
-/* EM Calorimeter */
-.hr-3 {
-  width: 530px;
-  height: 530px;
-  border: 1px solid rgba(91,156,246,0.11);
-}
-/* Hadronic Calorimeter */
-.hr-4 {
-  width: 760px;
-  height: 760px;
-  border: 1px solid rgba(91,156,246,0.07);
-}
-/* Muon Spectrometer — outermost, most subtle */
-.hr-5 {
-  width: 1020px;
-  height: 1020px;
-  border: 0.5px solid rgba(91,156,246,0.04);
-}
-
-/* ── Rotating arc markers (circulating beams) ─────────────── */
-/* Each ring's ::before is a thin arc that sweeps around the ring,
-   representing a circulating proton bunch */
-.hr-1::before,
-.hr-2::before,
-.hr-3::before,
-.hr-4::before,
-.hr-5::before {
-  content: '';
+/* Zero-dimension wrapper that rotates around the ring centre */
+.hero-orb-wrap {
   position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 2px solid transparent;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  pointer-events: none;
+  animation: ring-rotate 22s linear infinite;
 }
 
-/* hr-1 also has a counter-rotating arc (LHC dual-beam) */
-.hr-1::after {
-  content: '';
+.hero-orb-wrap--b {
+  animation-duration: 34s;
+  animation-direction: reverse;
+  animation-delay: -17s; /* 180° phase offset */
+}
+
+/* Actual ball: offset to ring radius (260 = 520/2) */
+.hero-orb {
   position: absolute;
-  inset: -1.5px;
+  width: 10px; height: 10px;
+  left: 260px; top: -5px;
   border-radius: 50%;
-  border: 1.5px solid transparent;
-  border-bottom: 1.5px solid rgba(91,156,246,0.55);
-  border-bottom-right-radius: 50%;
-  animation: arc-spin 12s linear infinite reverse;
+  background: radial-gradient(circle, rgba(220,235,255,0.95) 0%, rgba(91,156,246,0.65) 55%, transparent 100%);
+  box-shadow: 0 0 18px 5px rgba(91,156,246,0.38), 0 0 6px 2px rgba(160,210,255,0.6);
 }
 
-/* Beam pipe arcs — brightest, fastest */
-.hr-1::before {
-  border-top: 2px solid rgba(140,195,255,0.95);
-  border-right: 2px solid rgba(91,156,246,0.30);
-  animation: arc-spin 12s linear infinite;
-}
-
-/* Inner Detector arc */
-.hr-2::before {
-  border-top: 1.5px solid rgba(91,156,246,0.72);
-  border-right: 1.5px solid rgba(91,156,246,0.18);
-  animation: arc-spin 22s linear infinite reverse;
-}
-
-/* EM Calorimeter arc */
-.hr-3::before {
-  border-top: 1.5px solid rgba(91,156,246,0.48);
-  border-right: 1.5px solid rgba(91,156,246,0.10);
-  animation: arc-spin 36s linear infinite;
-}
-
-/* Hadronic Calorimeter arc */
-.hr-4::before {
-  border-top: 1px solid rgba(91,156,246,0.28);
-  animation: arc-spin 52s linear infinite reverse;
-}
-
-/* Muon Spectrometer arc — barely visible */
-.hr-5::before {
-  border-top: 0.5px solid rgba(91,156,246,0.15);
-  animation: arc-spin 74s linear infinite;
-}
-
-/* Interaction-point marker — tiny bright core */
-.hero-ip {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(140,195,255,0.6) 50%, transparent 100%);
-  box-shadow:
-    0 0 6px 2px rgba(91,156,246,0.8),
-    0 0 20px 6px rgba(91,156,246,0.3),
-    0 0 50px 12px rgba(91,156,246,0.10);
-  animation: ip-pulse 4s ease-in-out infinite;
-}
-
-@keyframes arc-spin {
+@keyframes ring-rotate {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-@keyframes ip-pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 6px 2px rgba(91,156,246,0.8), 0 0 20px 6px rgba(91,156,246,0.3), 0 0 50px 12px rgba(91,156,246,0.10); }
-  50%       { opacity: 0.7; box-shadow: 0 0 10px 4px rgba(91,156,246,0.6), 0 0 28px 8px rgba(91,156,246,0.2), 0 0 70px 18px rgba(91,156,246,0.06); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hr-1, .hr-2, .hr-3, .hr-4, .hr-5,
-  .hr-1::before, .hr-1::after,
-  .hr-2::before, .hr-3::before, .hr-4::before, .hr-5::before,
-  .hero-ip { animation: none; }
+  .hero-orb-wrap { animation: none; }
 }
 
 .hero-content {
@@ -2162,6 +2073,60 @@ h1, h2, h3, h4, h5, h6 {
 /* Mobile: extra gap between Latest News and Latest Publication columns */
 @media (max-width: 640px) {
   .latest-lab-grid { gap: var(--sp-10); }
+}
+
+/* ============================================================
+   Wave underline — all inline text links in content areas
+   (excludes nav, footer, buttons; extends the .news-read-more effect)
+   ============================================================ */
+.text-link,
+.info-box a,
+.legacy-banner-text a,
+.cern-prose a,
+.cern-nipscern-note a,
+.post-body a,
+.coordinator-bio a,
+.cern-tl-desc a,
+.release-note a {
+  color: var(--brand);
+  position: relative;
+  text-decoration: none;
+}
+
+.text-link::after,
+.info-box a::after,
+.legacy-banner-text a::after,
+.cern-prose a::after,
+.cern-nipscern-note a::after,
+.post-body a::after,
+.coordinator-bio a::after,
+.cern-tl-desc a::after,
+.release-note a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='3' viewBox='0 0 20 3'%3E%3Cpath d='M0 1.5 Q5 0 10 1.5 Q15 3 20 1.5' fill='none' stroke='%235b9cf6' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 20px 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.text-link:hover::after,
+.info-box a:hover::after,
+.legacy-banner-text a:hover::after,
+.cern-prose a:hover::after,
+.cern-nipscern-note a:hover::after,
+.post-body a:hover::after,
+.coordinator-bio a:hover::after,
+.cern-tl-desc a:hover::after,
+.release-note a:hover::after {
+  opacity: 1;
+  animation: wave-move 0.6s linear infinite;
 }
 
 /* ============================================================

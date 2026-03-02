@@ -86,6 +86,7 @@
         <div class="section-header fade-up">
           <div class="eyebrow">
             <i class="ph ph-medal" aria-hidden="true"></i>
+            <span data-i18n="about.coordinator.eyebrow">Leadership</span>
           </div>
           <h2 class="heading-lg" id="coordinator-title" data-i18n="about.coordinator.title">Laboratory Coordinator</h2>
         </div>
@@ -104,6 +105,7 @@
         <div class="section-header fade-up">
           <div class="eyebrow">
             <i class="ph ph-users-three" aria-hidden="true"></i>
+            <span data-i18n="about.team.eyebrow">Researchers & Students</span>
           </div>
           <h2 class="heading-lg" id="team-title" data-i18n="about.team.title">Our Team</h2>
           <p class="body-base" style="max-width:520px;margin-top:var(--sp-3)" data-i18n="about.team.subtitle">
@@ -125,6 +127,7 @@
         <div class="section-header fade-up">
           <div class="eyebrow">
             <i class="ph ph-buildings" aria-hidden="true"></i>
+            <span data-i18n="about.infrastructure.eyebrow">Facilities</span>
           </div>
           <h2 class="heading-lg" id="infra-title" data-i18n="about.infrastructure.title">Laboratory Infrastructure</h2>
           <p class="body-base" style="max-width:520px;margin-top:var(--sp-3)" data-i18n="about.infrastructure.subtitle">
@@ -182,29 +185,30 @@
         <div class="section-header section-header--center fade-up">
           <div class="eyebrow" style="justify-content:center">
             <i class="ph ph-handshake" aria-hidden="true"></i>
+            <span data-i18n="about.partners.eyebrow">Support & Collaboration</span>
           </div>
           <h2 class="heading-lg" id="partners-title" data-i18n="about.partners.title">Partner Institutions</h2>
         </div>
 
         <div class="sponsors-logos fade-up">
           <a href="https://ufjf.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="UFJF - Universidade Federal de Juiz de Fora">
-            <div style="width:48px;height:48px;background:var(--border-mid);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">IMG</div>
+            <img src="assets/images/sponsors/ufjf.png" alt="UFJF logo">
             <span class="sponsor-name">UFJF</span>
           </a>
           <a href="https://cern.ch" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CERN">
-            <div style="width:48px;height:48px;background:var(--border-mid);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">IMG</div>
+            <img src="assets/images/sponsors/cern.svg" alt="CERN logo">
             <span class="sponsor-name">CERN</span>
           </a>
           <a href="https://fapemig.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="FAPEMIG">
-            <div style="width:48px;height:48px;background:var(--border-mid);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">IMG</div>
+            <img src="assets/images/sponsors/fapemig.png" alt="FAPEMIG logo">
             <span class="sponsor-name">FAPEMIG</span>
           </a>
           <a href="https://capes.gov.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CAPES">
-            <div style="width:48px;height:48px;background:var(--border-mid);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">IMG</div>
+            <img src="assets/images/sponsors/capes.png" alt="CAPES logo">
             <span class="sponsor-name">CAPES</span>
           </a>
           <a href="https://cnpq.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CNPq">
-            <div style="width:48px;height:48px;background:var(--border-mid);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono)">IMG</div>
+            <img src="assets/images/sponsors/cnpq.svg" alt="CNPq logo">
             <span class="sponsor-name">CNPq</span>
           </a>
         </div>
@@ -222,6 +226,7 @@
       <div class="vw-plugin-top-wrapper"></div>
     </div>
   </div>
+  <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
 
@@ -312,8 +317,11 @@
             ${avatarHTML(member, 64)}
             <div style="flex:1">
               <div class="team-name" id="member-${member.id}">${member.title ? member.title + ' ' : ''}${member.name}</div>
-              <div style="margin-top:4px">
-                <span class="badge ${roleClass(member.role)}">${member.role}</span>
+              <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">
+                ${member.tags
+                  ? member.tags.map(t => `<span class="badge ${t.class}">${t.label}</span>`).join('')
+                  : `<span class="badge ${roleClass(member.role)}">${member.role}</span>`
+                }
               </div>
             </div>
           </div>

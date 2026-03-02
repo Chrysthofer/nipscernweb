@@ -218,15 +218,14 @@
   <script>
     // ============================================================
     // CERN Courier issue data
-    // 2013–2018: monthly (Jul/Aug combined) = 11 issues/year
+    // 2013–2018: 10 issues/year (Jan/Feb combined, Jul/Aug combined)
     // 2019–2026: bimonthly = 6 issues/year
     // URL for 2013–2018: upload path is always 2019/04
     // URL for 2019+: upload path matches issue YYYY/MM
     // ============================================================
 
     const MONTHS_MONTHLY = [
-      { mon: '01', label: 'January',   pdfMon: 'Jan',    imgMon: '01' },
-      { mon: '02', label: 'February',  pdfMon: 'Feb',    imgMon: '02' },
+      { mon: '01', label: 'Jan/Feb',   pdfMon: 'JanFeb', imgMon: '01' },
       { mon: '03', label: 'March',     pdfMon: 'Mar',    imgMon: '03' },
       { mon: '04', label: 'April',     pdfMon: 'Apr',    imgMon: '04' },
       { mon: '05', label: 'May',       pdfMon: 'May',    imgMon: '05' },
@@ -255,7 +254,7 @@
     }
 
     function coverPath(year, entry) {
-      return '../assets/images/magazine/courier-' + year + '-' + entry.imgMon + '.jpg';
+      return '../assets/images/magazine/CERNCourier' + year + entry.pdfMon + '.jpg';
     }
 
     function buildIssues() {
