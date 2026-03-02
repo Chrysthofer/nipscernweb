@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <rect width="80" height="80" rx="10" fill="#0c3b8a"/>
+  <polygon points="40,8 72,26 72,54 40,72 8,54 8,26" fill="none" stroke="#5b9cf6" stroke-width="2.5" opacity="0.8"/>
+  <text x="40" y="34" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ffffff" letter-spacing="0.5">FAP</text>
+  <text x="40" y="50" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#88b4f5" letter-spacing="0.3">EMIG</text>
+  <text x="40" y="64" text-anchor="middle" font-family="Arial,sans-serif" font-size="7.5" font-weight="400" fill="#5b9cf6" letter-spacing="0.5">MINAS GERAIS</text>
+</svg>

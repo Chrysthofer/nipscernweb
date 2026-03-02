@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLARIS — Cross-Platform IDE for SAPHO | NIPSCERN</title>
+  <meta name="description" content="POLARIS is a modern, cross-platform graphical IDE built with Tauri and Rust for the SAPHO ecosystem. Features Monaco Editor, PRISM RTL Viewer, and YAWT Wave Tracer integration.">
+
+  <meta property="og:type"  content="website">
+  <meta property="og:url"   content="https://nipscern.com/projects/polaris.html">
+  <meta property="og:title" content="POLARIS — Cross-Platform IDE for SAPHO | NIPSCERN">
+  <meta property="og:description" content="Modern, lightweight IDE built with Tauri and Rust. The successor to AURORA, now supporting Linux and Windows.">
+  <meta property="og:image" content="https://nipscern.com/assets/images/projects/polaris.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nipscern.com/projects/polaris.html">
+
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>:root { --page-accent: var(--accent-polaris); }</style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to content</a>
+  <nav id="nav" role="navigation" aria-label="Main navigation"></nav>
+
+  <main id="main">
+
+    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(6,182,212,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="polaris-title">
+      <div class="project-hero-inner">
+        <div class="project-hero-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)">
+          <i class="ph ph-desktop" aria-hidden="true"></i>
+        </div>
+        <div class="project-hero-text">
+          <div class="eyebrow fade-up">
+            <i class="ph ph-desktop" aria-hidden="true"></i>
+            Cross-Platform IDE
+          </div>
+          <h1 class="project-hero-name fade-up" id="polaris-title">
+            <span style="color:var(--accent-polaris)">POLARIS</span>
+          </h1>
+          <p class="project-hero-fullname fade-up" data-i18n="projects.polaris.full">Cross-Platform Graphical IDE for SAPHO</p>
+          <p class="project-hero-desc fade-up" data-i18n="projects.polaris.desc">
+            POLARIS is a modern, cross-platform graphical development environment built with Tauri and Rust. It integrates Monaco Editor for code editing, the PRISM RTL Viewer, and the YAWT Wave Tracer — the lightweight successor to AURORA.
+          </p>
+          <div class="project-links fade-up">
+            <a href="https://github.com/nipscernlab/polaris" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--accent-polaris);border-color:var(--accent-polaris)">
+              <i class="ph ph-github-logo" aria-hidden="true"></i>
+              <span data-i18n="projects.github">View on GitHub</span>
+            </a>
+            <a href="aurora.html" class="btn btn-ghost">
+              <i class="ph ph-arrow-clockwise" aria-hidden="true"></i>
+              Succeeded AURORA
+            </a>
+            <a href="index.html" class="btn btn-ghost">
+              <i class="ph ph-arrow-left" aria-hidden="true"></i>
+              All Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div style="background:var(--bg-card);border-bottom:1px solid var(--border-subtle);padding:var(--sp-4) var(--container-pad)">
+      <div style="max-width:var(--container-max);margin:0 auto;display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
+        <span class="badge badge-cyan"><i class="ph ph-windows-logo" aria-hidden="true"></i> Windows</span>
+        <span class="badge badge-cyan"><i class="ph ph-linux-logo" aria-hidden="true"></i> Linux</span>
+        <span class="badge badge-cyan">Tauri + Rust</span>
+        <span class="badge badge-gray">Open Source</span>
+        <span class="badge badge-green">Active</span>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-2" style="gap:var(--sp-12);align-items:start">
+
+          <div class="fade-up">
+            <div class="accent-line" style="background:var(--accent-polaris)" aria-hidden="true"></div>
+            <h2 class="heading-lg" data-i18n="projects.polaris.features.title">Key Features</h2>
+
+            <div class="feature-list" style="margin-top:var(--sp-6)">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)"><i class="ph ph-package" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.polaris.features.tauri">Built with Tauri + Rust — lightweight and fast</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)"><i class="ph ph-code" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.polaris.features.monaco">Monaco Editor (same engine as VS Code)</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(249,115,22,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.polaris.features.prism">Integrated PRISM RTL Viewer</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(91,156,246,0.12);color:var(--brand)"><i class="ph ph-wave-sine" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.polaris.features.yawt">Integrated YAWT Wave Tracer</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(16,185,129,0.12);color:var(--accent-cgv)"><i class="ph ph-devices" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.polaris.features.cross">Native Linux and Windows binaries</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-up">
+            <h3 class="heading-sm" style="margin-bottom:var(--sp-5)">POLARIS vs. AURORA</h3>
+
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);overflow:hidden">
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0">
+                <div style="padding:var(--sp-3) var(--sp-4);background:var(--bg-elevated);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Feature</div>
+                <div style="padding:var(--sp-3) var(--sp-4);background:rgba(6,182,212,0.1);font-size:var(--text-xs);font-weight:700;color:var(--accent-polaris);text-align:center">POLARIS</div>
+                <div style="padding:var(--sp-3) var(--sp-4);background:rgba(244,63,94,0.05);font-size:var(--text-xs);font-weight:700;color:var(--accent-aurora);text-align:center">AURORA</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-subtle)">
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);color:var(--text-secondary)">Framework</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--accent-polaris);font-weight:500">Tauri + Rust</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--text-muted)">Electron</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-subtle)">
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);color:var(--text-secondary)">Platform</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--accent-polaris);font-weight:500">Linux + Windows</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--text-muted)">Windows only</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-subtle)">
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);color:var(--text-secondary)">Memory usage</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--accent-polaris);font-weight:500">~60 MB</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--text-muted)">~300 MB</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border-subtle)">
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);color:var(--text-secondary)">Status</div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center;color:var(--accent-polaris);font-weight:500">
+                  <span class="badge badge-green" style="font-size:11px">Active</span>
+                </div>
+                <div style="padding:var(--sp-3) var(--sp-4);font-size:var(--text-xs);text-align:center">
+                  <span class="badge badge-red" style="font-size:11px">Legacy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="section" style="background:var(--bg-0);border-top:1px solid var(--border-subtle)">
+      <div class="container">
+        <h2 class="heading-md fade-up" style="margin-bottom:var(--sp-6)">Screenshots</h2>
+        <div class="grid grid-2 fade-up" style="gap:var(--sp-4)">
+          <div style="aspect-ratio:16/9;background:var(--bg-card);border:1px solid var(--border-mid);border-radius:var(--r-xl);display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+            <div style="text-align:center"><i class="ph ph-image" style="font-size:40px" aria-hidden="true"></i><p style="font-size:var(--text-xs);margin-top:8px">POLARIS IDE screenshot<br>assets/images/projects/polaris-1.jpg</p></div>
+          </div>
+          <div style="aspect-ratio:16/9;background:var(--bg-card);border:1px solid var(--border-mid);border-radius:var(--r-xl);display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+            <div style="text-align:center"><i class="ph ph-image" style="font-size:40px" aria-hidden="true"></i><p style="font-size:var(--text-xs);margin-top:8px">PRISM RTL Viewer<br>assets/images/projects/polaris-2.jpg</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" role="contentinfo"></footer>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

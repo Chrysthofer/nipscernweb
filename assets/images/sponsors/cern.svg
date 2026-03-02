@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <rect width="80" height="80" rx="10" fill="#07254a"/>
+  <!-- CERN-style orbit rings -->
+  <circle cx="40" cy="40" r="28" fill="none" stroke="#0053a1" stroke-width="2"/>
+  <ellipse cx="40" cy="40" rx="28" ry="11" fill="none" stroke="#3b82f6" stroke-width="1.6" transform="rotate(-40 40 40)"/>
+  <ellipse cx="40" cy="40" rx="28" ry="11" fill="none" stroke="#3b82f6" stroke-width="1.6" transform="rotate(40 40 40)"/>
+  <!-- Particle dots on orbits -->
+  <circle cx="40" cy="12" r="3" fill="#60a5fa"/>
+  <circle cx="65" cy="55" r="2.5" fill="#93c5fd"/>
+  <circle cx="15" cy="55" r="2" fill="#bfdbfe"/>
+  <text x="40" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="2">CERN</text>
+</svg>

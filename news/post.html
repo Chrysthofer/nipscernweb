@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">News — NIPSCERN</title>
+  <meta name="description" id="page-desc" content="News post from NIPSCERN.">
+
+  <meta property="og:type"  content="article">
+  <meta property="og:url"   id="og-url" content="https://nipscern.com/news/post.html">
+  <meta property="og:title" id="og-title" content="News — NIPSCERN">
+  <meta property="og:description" id="og-desc" content="News post from NIPSCERN.">
+  <meta property="og:image" id="og-image" content="https://nipscern.com/assets/images/og-news.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to content</a>
+  <nav id="nav" role="navigation" aria-label="Main navigation"></nav>
+
+  <main id="main">
+
+    <!-- Post header (populated dynamically) -->
+    <header class="post-header" id="post-header" aria-labelledby="post-title" style="display:none">
+      <div class="post-header-inner">
+        <div class="post-meta">
+          <a href="index.html" class="btn btn-ghost btn-sm" data-i18n="news.back">
+            <i class="ph ph-arrow-left" aria-hidden="true"></i>
+            Back to News
+          </a>
+          <span class="badge" id="post-category-badge"></span>
+          <time id="post-date" class="news-date"></time>
+        </div>
+        <h1 class="post-title" id="post-title"></h1>
+        <p class="post-excerpt" id="post-excerpt"></p>
+      </div>
+    </header>
+
+    <!-- Post not found -->
+    <div id="post-not-found" style="display:none;text-align:center;padding:var(--sp-32) var(--container-pad)">
+      <i class="ph ph-file-x" style="font-size:60px;color:var(--text-muted);margin-bottom:var(--sp-6)" aria-hidden="true"></i>
+      <h1 class="heading-lg" style="margin-bottom:var(--sp-4)">Post not found</h1>
+      <p class="body-base" style="margin-bottom:var(--sp-8)">The news post you are looking for does not exist or has been removed.</p>
+      <a href="index.html" class="btn btn-primary" data-i18n="news.back">
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+        Back to News
+      </a>
+    </div>
+
+    <!-- Loading state -->
+    <div id="post-loading" style="text-align:center;padding:var(--sp-32) var(--container-pad);color:var(--text-muted)">
+      <div class="cgv-spinner" style="margin:0 auto var(--sp-4)" aria-hidden="true"></div>
+      <span data-i18n="common.loading">Loading…</span>
+    </div>
+
+    <!-- Post body -->
+    <div class="post-body" id="post-body" style="display:none"></div>
+
+    <!-- Post footer / related -->
+    <div id="post-footer" style="display:none;border-top:1px solid var(--border-subtle);padding:var(--sp-12) var(--container-pad)">
+      <div style="max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-4)">
+        <a href="index.html" class="btn btn-ghost" data-i18n="news.back">
+          <i class="ph ph-arrow-left" aria-hidden="true"></i>
+          Back to News
+        </a>
+        <div style="display:flex;align-items:center;gap:var(--sp-2)">
+          <span style="font-size:var(--text-sm);color:var(--text-muted)" data-i18n="news.share">Share</span>
+          <button onclick="navigator.share && navigator.share({title: document.title, url: window.location.href})" class="btn btn-ghost btn-sm" aria-label="Share this post">
+            <i class="ph ph-share-network" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="footer" role="contentinfo"></footer>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+  <script type="module">
+    import { formatDate } from '../assets/js/main.js';
+
+    function catClass(cat) {
+      const m = { publication:'cat-publication', award:'cat-award', event:'cat-event', milestone:'cat-milestone' };
+      return m[cat] || 'badge-gray';
+    }
+
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      document.getElementById('post-loading').style.display = 'block';
+
+      let posts;
+      try {
+        const res = await fetch('../data/news.json');
+        posts = await res.json();
+      } catch (e) {
+        posts = [];
+      }
+
+      document.getElementById('post-loading').style.display = 'none';
+
+      const post = posts.find(p => p.id === id);
+      if (!post) {
+        document.getElementById('post-not-found').style.display = 'block';
+        return;
+      }
+
+      // Update meta
+      document.getElementById('page-title').textContent = post.title + ' — NIPSCERN';
+      document.getElementById('page-desc').content = post.excerpt;
+      document.getElementById('og-title').content = post.title;
+      document.getElementById('og-desc').content = post.excerpt;
+      document.getElementById('og-url').content = 'https://nipscern.com/news/post.html?id=' + post.id;
+
+      // Render header
+      const badge = document.getElementById('post-category-badge');
+      badge.className = 'badge ' + catClass(post.category);
+      badge.setAttribute('data-i18n', 'news.categories.' + post.category);
+      badge.textContent = post.category;
+
+      document.getElementById('post-date').textContent = formatDate(post.date);
+      document.getElementById('post-date').setAttribute('datetime', post.date);
+      document.getElementById('post-title').textContent = post.title;
+      document.getElementById('post-excerpt').textContent = post.excerpt;
+      document.getElementById('post-header').style.display = 'block';
+
+      // Render body
+      const bodyEl = document.getElementById('post-body');
+      const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+      bodyEl.innerHTML = paragraphs;
+      bodyEl.style.display = 'block';
+
+      // Embedded video (YouTube)
+      if (post.video) {
+        const ytId = post.video.match(/(?:v=|youtu\.be\/)([^&?/]+)/)?.[1];
+        if (ytId) {
+          bodyEl.innerHTML += `
+            <div class="post-video-wrap" style="margin:var(--sp-10) 0">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/${ytId}"
+                title="Video: ${post.title}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                style="width:100%;aspect-ratio:16/9;border:0;border-radius:var(--r-xl);display:block"
+              ></iframe>
+            </div>`;
+        }
+      }
+
+      // Tags
+      if (post.tags && post.tags.length) {
+        bodyEl.innerHTML += `<div class="pub-tags" style="margin-top:var(--sp-8)">${post.tags.map(t => `<span class="pub-tag">${t}</span>`).join('')}</div>`;
+      }
+
+      document.getElementById('post-footer').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPost);
+  </script>
+
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Viewer — NIPSCERN</title>
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #070a12;
+      --bar-bg:  #0d1120;
+      --border:  rgba(255,255,255,0.08);
+      --text:    #e2e8f0;
+      --muted:   #64748b;
+      --brand:   #5b9cf6;
+      --brand2:  rgba(91,156,246,0.12);
+      --r:       8px;
+      --t:       0.18s ease;
+    }
+
+    html, body { height: 100%; overflow: hidden; background: var(--bg); }
+
+    /* ---- Toolbar ---- */
+    #pdf-toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: var(--bar-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    /* Brand */
+    .tb-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+    .tb-brand img {
+      width: 26px;
+      height: 26px;
+    }
+    .tb-brand-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--brand);
+    }
+
+    .tb-sep {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+      margin: 0 4px;
+    }
+
+    /* Title */
+    .tb-title {
+      flex: 1;
+      min-width: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 8px;
+    }
+
+    /* Buttons */
+    .tb-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      height: 34px;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background var(--t), border-color var(--t), color var(--t);
+      text-decoration: none;
+    }
+    .tb-btn:hover {
+      background: var(--brand2);
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+    .tb-btn i { font-size: 15px; }
+
+    .tb-btn-primary {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+    .tb-btn-primary:hover {
+      background: #4a8de8;
+      border-color: #4a8de8;
+      color: #fff;
+    }
+
+    /* Toast notification */
+    #pdf-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid rgba(91,156,246,0.3);
+      border-radius: 24px;
+      padding: 8px 18px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #pdf-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    #pdf-toast i { color: var(--brand); }
+
+    /* Info panel */
+    #pdf-info-panel {
+      position: fixed;
+      top: 52px;
+      right: 0;
+      width: min(380px, 90vw);
+      background: var(--bar-bg);
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.24s ease;
+      z-index: 90;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      border-bottom-left-radius: 12px;
+    }
+    #pdf-info-panel.open { transform: translateX(0); }
+
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .info-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .info-value {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .info-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .info-close:hover { background: var(--brand2); color: var(--brand); }
+
+    /* PDF iframe */
+    #pdf-frame {
+      position: fixed;
+      top: 52px; left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: calc(100% - 52px);
+      border: none;
+      background: #1a1a2e;
+    }
+
+    /* No-PDF fallback */
+    #pdf-fallback {
+      display: none;
+      position: fixed;
+      top: 52px; left: 0; right: 0; bottom: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+    #pdf-fallback i { font-size: 48px; opacity: 0.3; }
+    #pdf-fallback p { font-size: 14px; max-width: 360px; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .tb-btn span { display: none; }
+      .tb-btn { padding: 0 8px; min-width: 34px; justify-content: center; }
+      .tb-title { font-size: 12px; }
+      .tb-brand-name { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toolbar -->
+  <div id="pdf-toolbar" role="toolbar" aria-label="PDF viewer controls">
+
+    <a href="/" class="tb-brand" id="tb-home" aria-label="NIPSCERN Home">
+      <img src="assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo">
+      <span class="tb-brand-name">NIPSCERN</span>
+    </a>
+
+    <div class="tb-sep" aria-hidden="true"></div>
+
+    <button class="tb-btn" id="btn-back" aria-label="Go back">
+      <i class="ph ph-arrow-left" aria-hidden="true"></i>
+      <span>Back</span>
+    </button>
+
+    <div class="tb-sep" aria-hidden="true"></div>
+
+    <div class="tb-title" id="pdf-title-display" aria-live="polite">Loading…</div>
+
+    <button class="tb-btn" id="btn-copy" aria-label="Copy document title">
+      <i class="ph ph-copy" aria-hidden="true"></i>
+      <span>Copy title</span>
+    </button>
+
+    <a class="tb-btn" id="btn-download" aria-label="Download PDF" download>
+      <i class="ph ph-download-simple" aria-hidden="true"></i>
+      <span>Download</span>
+    </a>
+
+    <button class="tb-btn tb-btn-primary" id="btn-info" aria-label="Document information" aria-expanded="false">
+      <i class="ph ph-info" aria-hidden="true"></i>
+      <span>Info</span>
+    </button>
+
+  </div>
+
+  <!-- Info panel (slide-in from right) -->
+  <aside id="pdf-info-panel" role="complementary" aria-label="Document details">
+    <button class="info-close" id="btn-info-close" aria-label="Close info panel">
+      <i class="ph ph-x" style="font-size:14px" aria-hidden="true"></i>
+    </button>
+    <div class="info-row">
+      <span class="info-label">Title</span>
+      <span class="info-value" id="info-title">—</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Authors</span>
+      <span class="info-value" id="info-authors">—</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Venue / Journal</span>
+      <span class="info-value" id="info-journal">—</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Year</span>
+      <span class="info-value" id="info-year">—</span>
+    </div>
+    <div class="info-row" id="info-doi-row" style="display:none">
+      <span class="info-label">DOI</span>
+      <a class="info-value" id="info-doi" href="#" target="_blank" rel="noopener" style="color:var(--brand)">—</a>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Source</span>
+      <span class="info-value" id="info-src" style="word-break:break-all;font-size:11px;color:var(--muted)">—</span>
+    </div>
+  </aside>
+
+  <!-- PDF embed -->
+  <iframe id="pdf-frame" title="PDF Document" aria-label="PDF document viewer"></iframe>
+
+  <!-- Fallback if no src provided -->
+  <div id="pdf-fallback" role="status">
+    <i class="ph ph-file-pdf" aria-hidden="true"></i>
+    <p>No PDF was specified. Return to the previous page and open a document link.</p>
+    <a href="/" class="tb-btn" style="margin-top:8px">
+      <i class="ph ph-house" aria-hidden="true"></i>
+      <span>Go to Home</span>
+    </a>
+  </div>
+
+  <!-- Toast -->
+  <div id="pdf-toast" role="status" aria-live="polite">
+    <i class="ph ph-check-circle" aria-hidden="true"></i>
+    <span id="toast-msg">Copied!</span>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var src     = params.get('src')   || '';
+      var title   = params.get('title') || '';
+      var authors = params.get('authors') || '';
+      var journal = params.get('journal') || '';
+      var year    = params.get('year')  || '';
+      var doi     = params.get('doi')   || '';
+      var back    = params.get('back')  || document.referrer || '/';
+
+      // Resolve path depth for root-relative assets
+      var depth = window.location.pathname.split('/').filter(Boolean).length - 1;
+      var base  = depth > 0 ? '../'.repeat(depth) : '';
+
+      // Update brand home link
+      var homeLink = document.getElementById('tb-home');
+      homeLink.href = base + 'index.html';
+      var logoImg = homeLink.querySelector('img');
+      if (logoImg) logoImg.src = base + 'assets/icons/icon_home_nipscern.SVG';
+
+      // Display title
+      var displayTitle = title || src.split('/').pop() || 'Document';
+      document.title = displayTitle + ' — NIPSCERN';
+      document.getElementById('pdf-title-display').textContent = displayTitle;
+
+      // Populate info panel
+      document.getElementById('info-title').textContent   = title   || displayTitle;
+      document.getElementById('info-authors').textContent = authors || '—';
+      document.getElementById('info-journal').textContent = journal || '—';
+      document.getElementById('info-year').textContent    = year    || '—';
+      document.getElementById('info-src').textContent     = src     || '—';
+
+      if (doi) {
+        document.getElementById('info-doi-row').style.display = '';
+        var doiLink = document.getElementById('info-doi');
+        doiLink.textContent = doi;
+        doiLink.href = doi.startsWith('http') ? doi : 'https://doi.org/' + doi;
+      }
+
+      // Load PDF
+      if (src) {
+        var frame = document.getElementById('pdf-frame');
+        frame.src = src;
+        var dlBtn = document.getElementById('btn-download');
+        dlBtn.href = src;
+        dlBtn.setAttribute('download', displayTitle + '.pdf');
+      } else {
+        document.getElementById('pdf-frame').style.display = 'none';
+        document.getElementById('pdf-fallback').style.display = 'flex';
+      }
+
+      // Back button
+      document.getElementById('btn-back').addEventListener('click', function () {
+        if (back && back !== window.location.href) {
+          window.location.href = back;
+        } else {
+          window.history.back();
+        }
+      });
+
+      // Copy title
+      document.getElementById('btn-copy').addEventListener('click', function () {
+        var text = title || displayTitle;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function () { showToast('Title copied to clipboard'); });
+        } else {
+          showToast('Copy not supported in this browser');
+        }
+      });
+
+      // Info panel toggle
+      var panel    = document.getElementById('pdf-info-panel');
+      var btnInfo  = document.getElementById('btn-info');
+      var btnClose = document.getElementById('btn-info-close');
+
+      btnInfo.addEventListener('click', function () {
+        var open = panel.classList.toggle('open');
+        btnInfo.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      btnClose.addEventListener('click', function () {
+        panel.classList.remove('open');
+        btnInfo.setAttribute('aria-expanded', 'false');
+      });
+
+      // Toast helper
+      var toastTimer;
+      function showToast(msg) {
+        var toast = document.getElementById('pdf-toast');
+        document.getElementById('toast-msg').textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2400);
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <rect width="80" height="80" rx="10" fill="#0e4d2b"/>
+  <!-- Torch flame -->
+  <path d="M40 10 C36 16 33 22 36 28 C34 24 38 20 40 18 C42 20 46 24 44 28 C47 22 44 16 40 10Z" fill="#4ade80" opacity="0.9"/>
+  <rect x="37" y="27" width="6" height="14" rx="1" fill="#22c55e"/>
+  <!-- Base -->
+  <rect x="33" y="41" width="14" height="3" rx="1.5" fill="#16a34a"/>
+  <rect x="35" y="44" width="10" height="2.5" rx="1" fill="#15803d"/>
+  <text x="40" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ffffff" letter-spacing="1">CAPES</text>
+  <text x="40" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" font-weight="400" fill="#86efac" letter-spacing="0.3">BRASIL</text>
+</svg>

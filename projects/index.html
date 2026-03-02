@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — NIPSCERN</title>
+  <meta name="description" content="Explore NIPSCERN's software and hardware projects: SAPHO, YANC, POLARIS, AURORA, CGV-WEB — tools for processor design, scientific computing, and calorimeter visualisation.">
+
+  <meta property="og:type"  content="website">
+  <meta property="og:url"   content="https://nipscern.com/projects/">
+  <meta property="og:title" content="Projects — NIPSCERN">
+  <meta property="og:description" content="Tools, architectures, and systems built at NIPSCERN for scientific research and hardware–software co-design.">
+  <meta property="og:image" content="https://nipscern.com/assets/images/og-projects.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nipscern.com/projects/">
+
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to content</a>
+  <nav id="nav" role="navigation" aria-label="Main navigation"></nav>
+
+  <main id="main">
+
+    <header class="page-hero" aria-labelledby="projects-title">
+      <div class="page-hero-inner">
+        <div class="eyebrow fade-up">
+          <i class="ph ph-code" aria-hidden="true"></i>
+          <span data-i18n="projects.title">Projects</span>
+        </div>
+        <h1 class="display-lg fade-up" id="projects-title" data-i18n="projects.title">Our Projects</h1>
+        <p class="body-lg fade-up" style="max-width:600px;margin-top:var(--sp-5)" data-i18n="projects.subtitle">
+          From processor design tools to calorimeter visualisation — each project serves real scientific and engineering needs.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-auto-lg stagger-children">
+
+          <!-- SAPHO -->
+          <a href="sapho.html" class="project-card" style="--project-accent:var(--accent-sapho);--project-accent-dim:rgba(249,115,22,0.1)" aria-label="SAPHO — Scalable Architecture for Hardware Optimization">
+            <div class="project-card-header">
+              <div class="project-icon"><i class="ph ph-cpu" aria-hidden="true"></i></div>
+              <div>
+                <div class="project-card-title">SAPHO</div>
+                <div class="project-card-full-name" data-i18n="projects.sapho.full">Scalable Architecture for Hardware Optimization</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.sapho.short">Complete toolchain for processor creation and hardware–software co-design.</p>
+              <div style="margin-top:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-1)">
+                <span class="badge badge-orange">Hardware</span>
+                <span class="badge badge-orange">FPGA</span>
+                <span class="badge badge-orange">CMM</span>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/nipscernlab/sapho" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">
+                <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </a>
+
+          <!-- YANC -->
+          <a href="yanc.html" class="project-card" style="--project-accent:var(--accent-yanc);--project-accent-dim:rgba(139,92,246,0.1)" aria-label="YANC — Yet Another Compiler">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-yanc);background:rgba(139,92,246,0.1)"><i class="ph ph-code-block" aria-hidden="true"></i></div>
+              <div>
+                <div class="project-card-title">YANC</div>
+                <div class="project-card-full-name" data-i18n="projects.yanc.full">Yet Another Compiler</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.yanc.short">The compiler toolchain powering the SAPHO ecosystem.</p>
+              <div style="margin-top:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-1)">
+                <span class="badge badge-purple">Compiler</span>
+                <span class="badge badge-purple">C</span>
+                <span class="badge badge-purple">Flex/Bison</span>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/nipscernlab/yanc" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">
+                <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </a>
+
+          <!-- POLARIS -->
+          <a href="polaris.html" class="project-card" style="--project-accent:var(--accent-polaris);--project-accent-dim:rgba(6,182,212,0.1)" aria-label="POLARIS — Cross-Platform IDE">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-polaris);background:rgba(6,182,212,0.1)"><i class="ph ph-desktop" aria-hidden="true"></i></div>
+              <div>
+                <div class="project-card-title">POLARIS</div>
+                <div class="project-card-full-name" data-i18n="projects.polaris.full">Cross-Platform Graphical IDE for SAPHO</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.polaris.short">Modern, lightweight IDE built with Tauri and Rust.</p>
+              <div style="margin-top:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-1)">
+                <span class="badge badge-cyan">Tauri</span>
+                <span class="badge badge-cyan">Rust</span>
+                <span class="badge badge-cyan">Monaco</span>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/nipscernlab/polaris" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">
+                <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </a>
+
+          <!-- AURORA -->
+          <a href="aurora.html" class="project-card" style="--project-accent:var(--accent-aurora);--project-accent-dim:rgba(244,63,94,0.1)" aria-label="AURORA — Windows IDE (Legacy)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-aurora);background:rgba(244,63,94,0.1)"><i class="ph ph-window" aria-hidden="true"></i></div>
+              <div>
+                <div class="project-card-title">AURORA</div>
+                <div class="project-card-full-name" data-i18n="projects.aurora.full">Windows IDE for SAPHO Ecosystem</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.aurora.short">Powerful Electron-based IDE — predecessor to POLARIS, with 25 releases.</p>
+              <div style="margin-top:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-1)">
+                <span class="badge badge-red">Legacy</span>
+                <span class="badge badge-red">Electron</span>
+                <span class="badge badge-red">v4.27.10</span>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/nipscernlab/aurora" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">
+                <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </a>
+
+          <!-- CGV-WEB -->
+          <a href="cgv.html" class="project-card" style="--project-accent:var(--accent-cgv);--project-accent-dim:rgba(16,185,129,0.1)" aria-label="CGV-WEB — Calorimeter Geometry Viewer">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-cgv);background:rgba(16,185,129,0.1)"><i class="ph ph-cube" aria-hidden="true"></i></div>
+              <div>
+                <div class="project-card-title">CGV-WEB</div>
+                <div class="project-card-full-name" data-i18n="projects.cgv.full">Calorimeter Geometry Viewer Web</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.cgv.short">3D calorimeter event visualisation — accessible worldwide.</p>
+              <div style="margin-top:var(--sp-4);display:flex;flex-wrap:wrap;gap:var(--sp-1)">
+                <span class="badge badge-green">Rust/WASM</span>
+                <span class="badge badge-green">Three.js</span>
+                <span class="badge badge-green">ATLAS</span>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/nipscernlab/cgv-web" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">
+                <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" role="contentinfo"></footer>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

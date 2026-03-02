@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YANC — Yet Another Compiler | NIPSCERN</title>
+  <meta name="description" content="YANC is the compiler toolchain powering the SAPHO ecosystem — including cmmcomp (CMM compiler) and asmcomp (assembly compiler). Written in C with Flex, Bison, and GCC.">
+
+  <meta property="og:type"  content="website">
+  <meta property="og:url"   content="https://nipscern.com/projects/yanc.html">
+  <meta property="og:title" content="YANC — Yet Another Compiler | NIPSCERN">
+  <meta property="og:description" content="The compiler toolchain powering the SAPHO hardware design ecosystem.">
+  <meta property="og:image" content="https://nipscern.com/assets/images/projects/yanc.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nipscern.com/projects/yanc.html">
+
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+    :root { --page-accent: var(--accent-yanc); --page-accent-dim: rgba(139,92,246,0.12); }
+    .pipeline-step {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      padding: var(--sp-5);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-xl);
+      position: relative;
+    }
+    .pipeline-step::after {
+      content: '';
+      position: absolute;
+      left: 28px;
+      bottom: -var(--sp-4);
+      width: 1px;
+      height: var(--sp-4);
+      background: var(--border-mid);
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-full);
+      background: rgba(139,92,246,0.15);
+      color: var(--accent-yanc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to content</a>
+  <nav id="nav" role="navigation" aria-label="Main navigation"></nav>
+
+  <main id="main">
+
+    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(139,92,246,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="yanc-title">
+      <div class="project-hero-inner">
+        <div class="project-hero-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)">
+          <i class="ph ph-code-block" aria-hidden="true"></i>
+        </div>
+        <div class="project-hero-text">
+          <div class="eyebrow fade-up">
+            <i class="ph ph-terminal" aria-hidden="true"></i>
+            Compiler Toolchain
+          </div>
+          <h1 class="project-hero-name fade-up" id="yanc-title">
+            <span style="color:var(--accent-yanc)">YANC</span>
+          </h1>
+          <p class="project-hero-fullname fade-up" data-i18n="projects.yanc.full">Yet Another Compiler</p>
+          <p class="project-hero-desc fade-up" data-i18n="projects.yanc.desc">
+            YANC is the compilation backbone of SAPHO, bridging high-level processor description languages and low-level execution. It comprises cmmcomp and asmcomp along with auxiliary tools for the full compilation pipeline.
+          </p>
+          <div class="project-links fade-up">
+            <a href="https://github.com/nipscernlab/yanc" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--accent-yanc);border-color:var(--accent-yanc)">
+              <i class="ph ph-github-logo" aria-hidden="true"></i>
+              <span data-i18n="projects.github">View on GitHub</span>
+            </a>
+            <a href="sapho.html" class="btn btn-ghost">
+              <i class="ph ph-cpu" aria-hidden="true"></i>
+              Part of SAPHO
+            </a>
+            <a href="index.html" class="btn btn-ghost">
+              <i class="ph ph-arrow-left" aria-hidden="true"></i>
+              All Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Platform badges -->
+    <div style="background:var(--bg-card);border-bottom:1px solid var(--border-subtle);padding:var(--sp-4) var(--container-pad)">
+      <div style="max-width:var(--container-max);margin:0 auto;display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
+        <span class="badge badge-purple">C Language</span>
+        <span class="badge badge-purple">Flex</span>
+        <span class="badge badge-purple">Bison</span>
+        <span class="badge badge-purple">GCC</span>
+        <span class="badge badge-gray">Open Source</span>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-2" style="gap:var(--sp-12);align-items:start">
+
+          <div class="fade-up">
+            <div class="accent-line" style="background:var(--accent-yanc)" aria-hidden="true"></div>
+            <h2 class="heading-lg" data-i18n="projects.yanc.features.title">Toolchain Components</h2>
+
+            <div class="feature-list" style="margin-top:var(--sp-6)">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.yanc.features.cmmcomp">cmmcomp: CMM high-level language compiler</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-cpu" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.yanc.features.asmcomp">asmcomp: Assembly-level compiler</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-gear" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.yanc.features.tech">Written in C with Flex, Bison, and GCC</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:rgba(249,115,22,0.12);color:var(--accent-sapho)"><i class="ph ph-plug" aria-hidden="true"></i></div>
+                <div class="feature-text" data-i18n="projects.yanc.features.integration">Fully integrated into the SAPHO ecosystem</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-up">
+            <h3 class="heading-sm" style="margin-bottom:var(--sp-5)">Compilation Pipeline</h3>
+            <div style="display:flex;flex-direction:column;gap:var(--sp-3)">
+              <div class="pipeline-step">
+                <div class="step-num">1</div>
+                <div>
+                  <div style="font-weight:600;color:var(--text-primary);font-size:var(--text-sm);margin-bottom:2px">CMM Source Code</div>
+                  <div style="font-size:var(--text-xs);color:var(--text-muted);font-family:var(--font-mono)">.cmm file</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-start;padding-left:15px">
+                <i class="ph ph-arrow-down" style="color:var(--border-mid)" aria-hidden="true"></i>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">2</div>
+                <div>
+                  <div style="font-weight:600;color:var(--text-primary);font-size:var(--text-sm);margin-bottom:2px">cmmcomp</div>
+                  <div style="font-size:var(--text-xs);color:var(--text-muted)">CMM → Assembly (Flex + Bison front-end)</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-start;padding-left:15px">
+                <i class="ph ph-arrow-down" style="color:var(--border-mid)" aria-hidden="true"></i>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">3</div>
+                <div>
+                  <div style="font-weight:600;color:var(--text-primary);font-size:var(--text-sm);margin-bottom:2px">asmcomp</div>
+                  <div style="font-size:var(--text-xs);color:var(--text-muted)">Assembly → Binary / Hex</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-start;padding-left:15px">
+                <i class="ph ph-arrow-down" style="color:var(--border-mid)" aria-hidden="true"></i>
+              </div>
+              <div class="pipeline-step">
+                <div class="step-num">4</div>
+                <div>
+                  <div style="font-weight:600;color:var(--text-primary);font-size:var(--text-sm);margin-bottom:2px">SAPHO Processor</div>
+                  <div style="font-size:var(--text-xs);color:var(--text-muted)">Machine code → execution on FPGA / simulation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" role="contentinfo"></footer>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIPSCERN — Research & Development Laboratory | UFJF · CERN</title>
+  <meta name="description" content="NIPSCERN is a research and development laboratory at the Federal University of Juiz de Fora (UFJF), Brazil, working in collaboration with CERN on high energy physics, scientific computing, and advanced hardware systems.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://nipscern.com/">
+  <meta property="og:title"       content="NIPSCERN — Research & Development Laboratory">
+  <meta property="og:description" content="Research and Development Laboratory at UFJF, Brazil — working at the frontier of high energy physics and scientific computing in collaboration with CERN.">
+  <meta property="og:image"       content="https://nipscern.com/assets/images/og-home.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="NIPSCERN — Research & Development Laboratory">
+  <meta name="twitter:description" content="Research and Development Laboratory at UFJF, Brazil — in collaboration with CERN, Geneva.">
+  <meta name="twitter:image"       content="https://nipscern.com/assets/images/og-home.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nipscern.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+
+  <!-- Three.js importmap (must come before any module scripts) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- Schema.org Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NIPSCERN",
+    "alternateName": "Núcleo de Instrumentação para Física de Partículas e Computação Científica",
+    "url": "https://nipscern.com",
+    "logo": "https://nipscern.com/assets/images/logo.png",
+    "description": "Research and development laboratory at the Federal University of Juiz de Fora, working in collaboration with CERN on high energy physics and scientific computing.",
+    "parentOrganization": {
+      "@type": "CollegeOrUniversity",
+      "name": "Universidade Federal de Juiz de Fora",
+      "url": "https://www.ufjf.br"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "contact@nipscern.com",
+      "contactType": "research"
+    },
+    "sameAs": [
+      "https://github.com/nipscernlab"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Skip to content -->
+  <a href="#main" class="skip-link" data-i18n="nav.skip">Skip to content</a>
+
+  <!-- Navigation (injected by main.js) -->
+  <nav id="nav" role="navigation" aria-label="Main navigation"></nav>
+
+  <main id="main">
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-ring"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-label" aria-label="Federal University of Juiz de Fora and CERN collaboration">
+          <span class="dot" aria-hidden="true"></span>
+          <span data-i18n="home.hero.label">Federal University of Juiz de Fora · CERN</span>
+        </div>
+        <h1 class="hero-title" id="hero-title" data-i18n="home.hero.title">NIPSCERN</h1>
+        <p class="hero-subtitle" data-i18n="home.hero.subtitle">
+          Research and Development Laboratory at UFJF, Brazil — working at the frontier of high energy physics, scientific computing, and advanced hardware systems in collaboration with CERN, Geneva.
+        </p>
+        <div class="hero-actions">
+          <a href="about.html" class="btn btn-primary btn-lg" data-i18n="home.hero.cta_primary">
+            <i class="ph ph-flask" aria-hidden="true"></i>
+            Explore Our Work
+          </a>
+          <a href="projects/index.html" class="btn btn-ghost btn-lg" data-i18n="home.hero.cta_secondary">
+            <i class="ph ph-grid-four" aria-hidden="true"></i>
+            View Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         MEDIA SLOT — place a video, reel, or SVG here
+         (remove the placeholder div and drop in your content)
+         ====================================================== -->
+    <!-- MEDIA-SLOT-HOME: replace or remove this block -->
+  
+  <section class="section" style="padding:0;background:var(--bg-0)">
+    <div class="container container--narrow" style="padding-top:var(--sp-12);padding-bottom:var(--sp-12)">
+      <div style="aspect-ratio:16/9;border-radius:var(--r-xl);overflow:hidden">
+
+        <video 
+          src="./assets/videos/CERN-FOOTAGE-2014-050-011-2160p.mp4"
+          autoplay 
+          muted 
+          loop 
+          playsinline
+          controls
+          style="width:100%;height:100%;object-fit:cover">
+        </video>
+
+      </div>
+    </div>
+  </section>
+   
+
+    <!-- ======================================================
+         STATS STRIP
+         ====================================================== -->
+    <div class="stats-strip" aria-label="Laboratory statistics">
+      <div class="stats-strip-inner stagger-children">
+        <div class="stat-item">
+          <div class="stat-number"><span class="accent">12</span>+</div>
+          <div class="stat-label" data-i18n="home.stats.years">Years of Research</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="accent">40</span>+</div>
+          <div class="stat-label" data-i18n="home.stats.publications">Publications</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="accent">80</span>+</div>
+          <div class="stat-label" data-i18n="home.stats.students">Students Trained</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span class="accent">3</span></div>
+          <div class="stat-label" data-i18n="home.stats.experiments">CERN Experiments</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         3D CALORIMETER PREVIEW
+         ====================================================== -->
+    <section class="cgv-section section" aria-labelledby="cgv-title">
+      <div class="cgv-container">
+        <div class="cgv-header fade-up">
+          <div class="eyebrow" style="justify-content:center">
+            <i class="ph ph-atom" aria-hidden="true"></i>
+            ATLAS Calorimeter
+          </div>
+          <h2 class="display-md" id="cgv-title" data-i18n="home.cgv.title">Live Collision Event</h2>
+          <p class="body-lg" style="max-width:560px;margin:var(--sp-4) auto 0" data-i18n="home.cgv.subtitle">
+            Interactive 3D rendering of the ATLAS calorimeter. Each colored cell represents energy deposited by particles in a simulated collision.
+          </p>
+        </div>
+
+        <div class="cgv-canvas-wrapper fade-up" id="cgv-canvas-wrapper" role="img" aria-label="Interactive 3D ATLAS calorimeter event display">
+          <canvas id="cgv-canvas" aria-hidden="true"></canvas>
+
+          <div class="cgv-loading" id="cgv-loading" aria-live="polite">
+            <div class="cgv-spinner" aria-hidden="true"></div>
+            <span data-i18n="home.cgv.loading">Initialising calorimeter geometry…</span>
+          </div>
+
+          <!-- Cell count badge -->
+          <div class="cgv-cell-count" aria-live="polite" aria-label="Active cells">
+            <span id="cgv-cell-count">0</span>
+            <span style="margin-left:4px;color:var(--text-muted)" data-i18n="home.cgv.cells_label">active cells</span>
+          </div>
+
+          <!-- Open Full CGV -->
+          <a href="https://nipscern.com/projects/cgv" target="_blank" rel="noopener"
+             class="btn btn-ghost btn-sm cgv-open-btn" id="cgv-open-btn"
+             data-i18n="home.cgv.btn_fullcgv">
+            <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+            Open Full CGV
+          </a>
+
+          <!-- Controls -->
+          <div class="cgv-controls" role="toolbar" aria-label="Calorimeter controls">
+            <button class="cgv-btn" id="cgv-btn-event" data-i18n="home.cgv.btn_event" aria-label="Generate new collision event">
+              Generate Event
+            </button>
+            <div class="cgv-divider" aria-hidden="true"></div>
+            <button class="cgv-btn" id="cgv-btn-wire" data-i18n="home.cgv.btn_wireframe" aria-pressed="false">
+              Wireframe
+            </button>
+            <div class="cgv-divider" aria-hidden="true"></div>
+            <button class="cgv-btn" id="cgv-btn-beam" data-i18n="home.cgv.btn_beam" aria-pressed="false">
+              Beam Axis
+            </button>
+            <div class="cgv-divider" aria-hidden="true"></div>
+            <button class="cgv-btn active" id="cgv-btn-tilecal" aria-pressed="true">TileCal</button>
+            <button class="cgv-btn active" id="cgv-btn-lar" aria-pressed="true">LAr</button>
+            <button class="cgv-btn active" id="cgv-btn-hec" aria-pressed="true">HEC</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         LATEST FROM THE LAB
+         ====================================================== -->
+    <section class="section" aria-labelledby="latest-title">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <div class="eyebrow" style="justify-content:center">
+            <i class="ph ph-newspaper" aria-hidden="true"></i>
+            From the Lab
+          </div>
+          <h2 class="display-md" id="latest-title" data-i18n="home.latest.title">Latest From the Lab</h2>
+        </div>
+
+        <div class="grid grid-2 stagger-children" style="max-width:960px;margin:0 auto">
+          <div>
+            <p class="label-sm" style="margin-bottom:var(--sp-4)" data-i18n="home.latest.news_label">Latest News</p>
+            <div id="latest-news-card" style="height:100%">
+              <!-- Populated by main.js -->
+              <div class="card card-body" style="height:200px;display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+                <i class="ph ph-spinner" aria-hidden="true" style="font-size:24px;opacity:0.5"></i>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="label-sm" style="margin-bottom:var(--sp-4)" data-i18n="home.latest.publication_label">Latest Publication</p>
+            <div id="latest-pub-card" style="height:100%">
+              <div class="card card-body" style="height:200px;display:flex;align-items:center;justify-content:center;color:var(--text-muted)">
+                <i class="ph ph-spinner" aria-hidden="true" style="font-size:24px;opacity:0.5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         PROJECTS GRID
+         ====================================================== -->
+    <section class="section" style="background:var(--bg-0);border-top:1px solid var(--border-subtle)" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <div class="eyebrow" style="justify-content:center">
+            <i class="ph ph-code" aria-hidden="true"></i>
+            Projects
+          </div>
+          <h2 class="display-md" id="projects-title" data-i18n="home.projects.title">Our Projects</h2>
+          <p class="body-lg" style="max-width:520px;margin:var(--sp-4) auto 0" data-i18n="home.projects.subtitle">
+            Tools, architectures, and systems built at NIPSCERN.
+          </p>
+        </div>
+
+        <div class="grid grid-3 stagger-children" id="projects-grid">
+
+          <!-- SAPHO -->
+          <a href="projects/sapho.html" class="project-card" style="--project-accent:var(--accent-sapho);--project-accent-dim:rgba(249,115,22,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon">
+                <i class="ph ph-cpu" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">SAPHO</div>
+                <div class="project-card-full-name">Scalable Architecture for Hardware Optimization</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.sapho.short">Complete toolchain for processor creation and hardware–software co-design.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-orange">Hardware</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- YANC -->
+          <a href="projects/yanc.html" class="project-card" style="--project-accent:var(--accent-yanc);--project-accent-dim:rgba(139,92,246,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-yanc);background:rgba(139,92,246,0.1)">
+                <i class="ph ph-code-block" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">YANC</div>
+                <div class="project-card-full-name">Yet Another Compiler</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.yanc.short">The compiler toolchain powering the SAPHO ecosystem.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-purple">Compiler</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- POLARIS -->
+          <a href="projects/polaris.html" class="project-card" style="--project-accent:var(--accent-polaris);--project-accent-dim:rgba(6,182,212,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-polaris);background:rgba(6,182,212,0.1)">
+                <i class="ph ph-desktop" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">POLARIS</div>
+                <div class="project-card-full-name">Cross-Platform IDE for SAPHO</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.polaris.short">Modern, lightweight IDE built with Tauri and Rust.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-cyan">IDE · Tauri</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- AURORA -->
+          <a href="projects/aurora.html" class="project-card" style="--project-accent:var(--accent-aurora);--project-accent-dim:rgba(244,63,94,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-aurora);background:rgba(244,63,94,0.1)">
+                <i class="ph ph-window" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">AURORA</div>
+                <div class="project-card-full-name">Windows IDE for SAPHO</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.aurora.short">Powerful Electron-based IDE — predecessor to POLARIS, with 25 releases.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-red">Legacy · Electron</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- CGV-WEB -->
+          <a href="projects/cgv.html" class="project-card" style="--project-accent:var(--accent-cgv);--project-accent-dim:rgba(16,185,129,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-cgv);background:rgba(16,185,129,0.1)">
+                <i class="ph ph-cube" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">CGV-WEB</div>
+                <div class="project-card-full-name">Calorimeter Geometry Viewer Web</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc" data-i18n="projects.cgv.short">3D calorimeter event visualisation — accessible worldwide.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-green">Rust · WASM · Three.js</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- CERN & ATLAS -->
+          <a href="cern.html" class="project-card" style="--project-accent:var(--accent-cern);--project-accent-dim:rgba(59,130,246,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-cern);background:rgba(59,130,246,0.1)">
+                <i class="ph ph-atom" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title">CERN &amp; ATLAS</div>
+                <div class="project-card-full-name">High Energy Physics</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc">The ATLAS experiment at the LHC — where NIPSCERN contributes to particle physics research.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-blue">LHC · TileCal</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- Publications -->
+          <a href="publications.html" class="project-card" style="--project-accent:var(--accent-pubs);--project-accent-dim:rgba(245,158,11,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-pubs);background:rgba(245,158,11,0.1)">
+                <i class="ph ph-book-open" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title" data-i18n="nav.publications">Publications</div>
+                <div class="project-card-full-name">Scientific Articles & Theses</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc">Peer-reviewed articles, conference papers, dissertations, and undergraduate theses.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-amber">JINST · IEEE · SBESC</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- News -->
+          <a href="news/index.html" class="project-card" style="--project-accent:var(--accent-news);--project-accent-dim:rgba(236,72,153,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-news);background:rgba(236,72,153,0.1)">
+                <i class="ph ph-newspaper" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title" data-i18n="nav.news">News</div>
+                <div class="project-card-full-name">Lab Updates & Events</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc">Awards, publications, events, and milestones from the NIPSCERN laboratory.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge badge-pink">Blog</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+          <!-- About Us -->
+          <a href="about.html" class="project-card" style="--project-accent:var(--accent-about);--project-accent-dim:rgba(168,85,247,0.1)">
+            <div class="project-card-header">
+              <div class="project-icon" style="color:var(--accent-about);background:rgba(168,85,247,0.1)">
+                <i class="ph ph-users" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="project-card-title" data-i18n="nav.about">About Us</div>
+                <div class="project-card-full-name">Team & Infrastructure</div>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <p class="project-card-desc">Meet the researchers, engineers, and students behind NIPSCERN's work.</p>
+            </div>
+            <div class="project-card-footer">
+              <span class="badge" style="background:rgba(168,85,247,0.15);color:#c084fc">Team · Lab</span>
+              <i class="ph ph-arrow-right" aria-hidden="true" style="color:var(--text-muted)"></i>
+            </div>
+          </a>
+
+        </div>
+
+        <div style="text-align:center;margin-top:var(--sp-10)">
+          <a href="projects/index.html" class="btn btn-ghost" data-i18n="home.projects.view_all">
+            View all projects
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SPONSORS STRIP
+         ====================================================== -->
+    <div class="sponsors-strip" aria-labelledby="sponsors-label">
+      <div class="sponsors-inner">
+        <p class="sponsors-label" id="sponsors-label" data-i18n="home.sponsors.title">Supported By</p>
+        <div class="sponsors-logos fade-up">
+          <a href="https://fapemig.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="FAPEMIG">
+            <img src="assets/images/sponsors/fapemig.svg" alt="FAPEMIG" width="56" height="56">
+          </a>
+          <a href="https://capes.gov.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CAPES">
+            <img src="assets/images/sponsors/capes.svg" alt="CAPES" width="56" height="56">
+          </a>
+          <a href="https://cnpq.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CNPq">
+            <img src="assets/images/sponsors/cnpq.svg" alt="CNPq" width="56" height="56">
+          </a>
+          <a href="https://ufjf.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="UFJF">
+            <img src="assets/images/sponsors/ufjf.svg" alt="UFJF" width="56" height="56">
+          </a>
+          <a href="https://cern.ch" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CERN">
+            <img src="assets/images/sponsors/cern.svg" alt="CERN" width="56" height="56">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer (injected by main.js) -->
+  <footer id="footer" role="contentinfo"></footer>
+
+  <!-- VLibras — Brazilian Sign Language Widget -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+  <!-- CGV Preview (Three.js) -->
+  <script type="module">
+    import { initCGVPreview } from './assets/js/cgv-preview.js';
+    document.addEventListener('DOMContentLoaded', () => initCGVPreview('cgv-canvas-wrapper'));
+  </script>
+
+  <!-- Main module -->
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>
