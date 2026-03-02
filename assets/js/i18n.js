@@ -6,10 +6,16 @@
 const SUPPORTED_LANGS = ['en', 'pt', 'fr', 'no'];
 const DEFAULT_LANG = 'en';
 const STORAGE_KEY = 'nipscern_lang';
-const I18N_PATH = '/data/i18n.json';
 
 let translations = {};
 let currentLang = DEFAULT_LANG;
+
+/**
+ * Root URL of the project — derived from this module's own URL.
+ * i18n.js lives at assets/js/i18n.js → go up 2 levels to reach the root.
+ * This works regardless of the server path (localhost, GitHub Pages subdir, or custom domain).
+ */
+const ROOT = new URL('../../', import.meta.url).href;
 
 /** Detect stored or browser language */
 function detectLanguage() {
@@ -24,11 +30,9 @@ function detectLanguage() {
   return DEFAULT_LANG;
 }
 
-/** Resolve a root-relative path from the current page location */
+/** Resolve a root-relative path robustly using import.meta.url */
 function rootPath(rel) {
-  const segs = window.location.pathname.split('/').filter(Boolean);
-  const depth = Math.max(0, segs.length - 1);
-  return (depth > 0 ? '../'.repeat(depth) : '') + rel;
+  return ROOT + rel;
 }
 
 /** Load the i18n JSON from data/i18n.json (relative to root) */

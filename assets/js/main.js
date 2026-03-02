@@ -10,13 +10,20 @@ import { initI18n, getLang, setLanguage } from './i18n.js';
 // ============================================================
 
 const NAV_LINKS = [
-  { key: 'nav.home',         href: '/',                  paths: ['/'] },
-  { key: 'nav.about',        href: '/about.html',        paths: ['/about.html'] },
-  { key: 'nav.cern',         href: '/cern.html',         paths: ['/cern.html'] },
-  { key: 'nav.projects',     href: '/projects/',         paths: ['/projects/', '/projects/index.html', '/projects/sapho.html', '/projects/yanc.html', '/projects/polaris.html', '/projects/aurora.html', '/projects/cgv.html'] },
-  { key: 'nav.publications', href: '/publications.html', paths: ['/publications.html'] },
-  { key: 'nav.news',         href: '/news/',             paths: ['/news/', '/news/index.html', '/news/post.html'] },
+  { key: 'nav.home',         href: 'index.html',         paths: ['/'] },
+  { key: 'nav.about',        href: 'about.html',         paths: ['/about.html'] },
+  { key: 'nav.cern',         href: 'cern.html',          paths: ['/cern.html'] },
+  { key: 'nav.projects',     href: 'projects/',          paths: ['/projects/', '/projects/index.html', '/projects/sapho.html', '/projects/yanc.html', '/projects/polaris.html', '/projects/aurora.html', '/projects/cgv.html'] },
+  { key: 'nav.publications', href: 'publications.html',  paths: ['/publications.html'] },
+  { key: 'nav.news',         href: 'news/',              paths: ['/news/', '/news/index.html', '/news/post.html'] },
 ];
+
+/**
+ * Root URL of the project — derived from this module's own URL.
+ * main.js lives at assets/js/main.js → go up 2 levels to reach the project root.
+ * Works on localhost, GitHub Pages subdirectory, and custom domain.
+ */
+const ROOT = new URL('../../', import.meta.url).href;
 
 const FLAG_SVGS = {
   en: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30">
@@ -44,12 +51,9 @@ const FLAG_SVGS = {
 
 function buildNav() {
   const path = window.location.pathname;
-  const segs = path.split('/').filter(Boolean);
-  const depth = Math.max(0, segs.length - 1);
-  const base = depth > 0 ? '../'.repeat(depth) : '';
 
   const linksHtml = NAV_LINKS.map(link => {
-    const href = base + link.href.replace(/^\//, '');
+    const href = ROOT + link.href;
     const isActive = link.paths.some(p => path.endsWith(p) || (p === '/' && (path === '/' || path.endsWith('/index.html'))));
     return `<a href="${href}" class="nav-link${isActive ? ' active' : ''}" data-i18n="${link.key}">${link.key}</a>`;
   }).join('');
@@ -61,15 +65,15 @@ function buildNav() {
   `).join('');
 
   const mobileLinksHtml = NAV_LINKS.map(link => {
-    const href = base + link.href.replace(/^\//, '');
+    const href = ROOT + link.href;
     const isActive = link.paths.some(p => path.endsWith(p));
     return `<a href="${href}" class="nav-mobile-link${isActive ? ' active' : ''}" data-i18n="${link.key}">${link.key}</a>`;
   }).join('');
 
   return `
     <div class="nav-inner">
-      <a href="${base}index.html" class="nav-logo" aria-label="NIPSCERN Home">
-        <img src="${base}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+      <a href="${ROOT}index.html" class="nav-logo" aria-label="NIPSCERN Home">
+        <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
         <span class="nav-logo-text">NIPSCERN</span>
       </a>
 
@@ -90,8 +94,8 @@ function buildNav() {
     <!-- Mobile overlay -->
     <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div class="nav-mobile-header">
-        <a href="${base}index.html" class="nav-logo">
-          <img src="${base}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+        <a href="${ROOT}index.html" class="nav-logo">
+          <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
           <span class="nav-logo-text">NIPSCERN</span>
         </a>
         <button id="nav-mobile-close" aria-label="Close menu" style="width:40px;height:40px;border-radius:8px;background:var(--border-subtle);border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;color:var(--text-secondary)">
@@ -150,13 +154,8 @@ function initNav() {
 // Footer Template
 // ============================================================
 function buildFooter() {
-  const path = window.location.pathname;
-  const segs = path.split('/').filter(Boolean);
-  const depth = Math.max(0, segs.length - 1);
-  const base = depth > 0 ? '../'.repeat(depth) : '';
-
   const links = NAV_LINKS.map(link => {
-    const href = base + link.href.replace(/^\//, '');
+    const href = ROOT + link.href;
     return `<li><a href="${href}" data-i18n="${link.key}">${link.key}</a></li>`;
   }).join('');
 
@@ -164,7 +163,7 @@ function buildFooter() {
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="${base}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
+          <img src="${ROOT}assets/icons/icon_home_nipscern.SVG" alt="NIPSCERN Logo" class="nav-logo-mark">
           <span style="font-size:var(--text-base);font-weight:700;letter-spacing:0.06em">NIPSCERN</span>
         </div>
         <p class="footer-tagline" data-i18n="footer.tagline">Research and Development Laboratory at UFJF, Brazil — in collaboration with CERN, Geneva.</p>
@@ -199,7 +198,7 @@ function buildFooter() {
           <li><a href="https://github.com/nipscernlab" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a></li>
           <li><a href="https://nipscern.com" target="_blank" rel="noopener">nipscern.com</a></li>
           <li><a href="https://lattes.cnpq.br/5454168673866452" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px">
-            <img src="${base}assets/icons/lattes_icon.svg" alt="Lattes" style="width:14px;height:14px;filter:brightness(0) invert(0.6)" aria-hidden="true"> Luciano — Lattes
+            <img src="${ROOT}assets/icons/lattes_icon.svg" alt="Lattes" style="width:14px;height:14px;filter:brightness(0) invert(0.6)" aria-hidden="true"> Luciano — Lattes
           </a></li>
           <li><a href="https://github.com/Chrysthofer" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px"><i class="ph ph-github-logo" aria-hidden="true"></i> Chrysthofer — GitHub</a></li>
         </ul>
@@ -244,11 +243,9 @@ function initAnimations() {
 // ============================================================
 // Load team, news, publications dynamically (home page)
 // ============================================================
-/** Resolve root-relative path from current page */
+/** Resolve a root-relative path using the module's known location */
 function rootPath(rel) {
-  const segs = window.location.pathname.split('/').filter(Boolean);
-  const depth = Math.max(0, segs.length - 1);
-  return (depth > 0 ? '../'.repeat(depth) : '') + rel;
+  return ROOT + rel;
 }
 
 async function fetchJSON(path) {

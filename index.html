@@ -85,8 +85,14 @@
          ====================================================== -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true">
-        <div class="hero-ring"></div>
-        <div class="hero-ring-inner"></div>
+        <!-- ATLAS-inspired detector cross-section rings -->
+        <div class="hr-1"></div>
+        <div class="hr-2"></div>
+        <div class="hr-3"></div>
+        <div class="hr-4"></div>
+        <div class="hr-5"></div>
+        <!-- Interaction-point glow -->
+        <div class="hero-ip"></div>
       </div>
       <div class="hero-content">
         <div class="hero-label" aria-label="Federal University of Juiz de Fora and CERN collaboration">
@@ -106,6 +112,12 @@
             <i class="ph ph-grid-four" aria-hidden="true"></i>
             View Projects
           </a>
+        </div>
+        <!-- Discrete view counter — loaded asynchronously from GoatCounter -->
+        <div class="hero-viewcount" id="hero-viewcount" aria-label="Page views" hidden>
+          <i class="ph ph-eye" aria-hidden="true"></i>
+          <span id="view-count">—</span>
+          <span data-i18n="home.hero.views">visitors</span>
         </div>
       </div>
     </section>
@@ -232,7 +244,7 @@
           <h2 class="display-md" id="latest-title" data-i18n="home.latest.title">Latest From the Lab</h2>
         </div>
 
-        <div class="grid grid-2 stagger-children" style="max-width:960px;margin:0 auto">
+        <div class="grid grid-2 stagger-children latest-lab-grid" style="max-width:960px;margin:0 auto">
           <div>
             <p class="label-sm" style="margin-bottom:var(--sp-4)" data-i18n="home.latest.news_label">Latest News</p>
             <div id="latest-news-card" style="height:100%">
@@ -471,16 +483,16 @@
         <p class="sponsors-label" id="sponsors-label" data-i18n="home.sponsors.title">Supported By</p>
         <div class="sponsors-logos fade-up">
           <a href="https://fapemig.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="FAPEMIG">
-            <img src="assets/images/sponsors/fapemig.svg" alt="FAPEMIG" width="56" height="56">
+            <img src="assets/images/sponsors/fapemig.png" alt="FAPEMIG" width="56" height="56">
           </a>
           <a href="https://capes.gov.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CAPES">
-            <img src="assets/images/sponsors/capes.svg" alt="CAPES" width="56" height="56">
+            <img src="assets/images/sponsors/capes.png" alt="CAPES" width="56" height="56">
           </a>
           <a href="https://cnpq.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CNPq">
             <img src="assets/images/sponsors/cnpq.svg" alt="CNPq" width="56" height="56">
           </a>
           <a href="https://ufjf.br" target="_blank" rel="noopener" class="sponsor-logo" aria-label="UFJF">
-            <img src="assets/images/sponsors/ufjf.svg" alt="UFJF" width="56" height="56">
+            <img src="assets/images/sponsors/ufjf.png" alt="UFJF" width="56" height="56">
           </a>
           <a href="https://cern.ch" target="_blank" rel="noopener" class="sponsor-logo" aria-label="CERN">
             <img src="assets/images/sponsors/cern.svg" alt="CERN" width="56" height="56">
@@ -512,6 +524,39 @@
 
   <!-- Main module -->
   <script type="module" src="assets/js/main.js"></script>
+
+  <!--
+    VIEW COUNTER — GoatCounter (https://www.goatcounter.com)
+    Setup (free, 30 seconds):
+      1. Sign up at goatcounter.com and choose the account code "nipscern"
+      2. In GoatCounter settings → API → create a read-only token
+      3. In GoatCounter settings → "Make statistics public" (optional, needed for the count display)
+      4. The script below handles both tracking and the discrete counter display.
+  -->
+  <script data-goatcounter="https://nipscern.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
+  <script>
+    // Discrete view counter — loads total hits from GoatCounter public API.
+    // Works once GoatCounter is set up and "public statistics" is enabled.
+    (function () {
+      const el = document.getElementById('view-count');
+      const wrap = document.getElementById('hero-viewcount');
+      if (!el || !wrap) return;
+
+      fetch('https://nipscern.goatcounter.com/api/v0/stats/pages' +
+            '?limit=1&start=2020-01-01&end=2099-12-31&filter=%2F')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          var count = data && data.pages && data.pages[0] && data.pages[0].count;
+          if (count != null) {
+            el.textContent = Number(count).toLocaleString();
+            wrap.removeAttribute('hidden');
+          }
+        })
+        .catch(function () { /* silently ignore — counter hidden by default */ });
+    })();
+  </script>
 
 </body>
 </html>

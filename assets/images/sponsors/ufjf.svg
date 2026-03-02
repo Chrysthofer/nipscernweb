@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
-  <rect width="80" height="80" rx="10" fill="#7c2d12"/>
-  <!-- Shield outline -->
-  <path d="M40 8 L66 20 L66 44 C66 56 54 68 40 74 C26 68 14 56 14 44 L14 20 Z" fill="none" stroke="#fdba74" stroke-width="2.2"/>
-  <!-- Shield fill subtle -->
-  <path d="M40 12 L63 23 L63 44 C63 55 52 66 40 71 C28 66 17 55 17 44 L17 23 Z" fill="#9a3412" opacity="0.6"/>
-  <text x="40" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#ffffff" letter-spacing="1">UFJF</text>
-  <text x="40" y="54" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" font-weight="400" fill="#fdba74" letter-spacing="0.3">JUIZ DE FORA</text>
-</svg>

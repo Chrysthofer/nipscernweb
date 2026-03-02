@@ -23,7 +23,27 @@
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
   <link rel="stylesheet" href="../assets/css/main.css">
 
-  <style>:root { --page-accent: var(--accent-aurora); }</style>
+  <style>
+    :root { --page-accent: var(--accent-aurora); }
+
+    .release-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: var(--text-xs);
+    }
+    .release-row:last-child { border-bottom: none; }
+    .release-tag {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .release-date { color: var(--text-muted); }
+    .release-note { color: var(--text-secondary); flex: 1; }
+  </style>
 </head>
 <body>
 
@@ -40,14 +60,14 @@
         <div class="project-hero-text">
           <div class="eyebrow fade-up">
             <i class="ph ph-archive" aria-hidden="true"></i>
-            Legacy Project
+            Legacy Project · Part of SAPHO
           </div>
           <h1 class="project-hero-name fade-up" id="aurora-title">
             <span style="color:var(--accent-aurora)">AURORA</span>
           </h1>
           <p class="project-hero-fullname fade-up" data-i18n="projects.aurora.full">Windows IDE for the SAPHO Ecosystem</p>
           <p class="project-hero-desc fade-up" data-i18n="projects.aurora.desc">
-            AURORA was a powerful, Windows-native IDE built with Electron for the SAPHO ecosystem. It supported CMM programming, Icarus Verilog simulation, GTKWave waveform visualisation, and the PRISM RTL Viewer. With 25 releases (latest v4.27.10), AURORA played a foundational role before being succeeded by POLARIS.
+            AURORA was a powerful, Windows-native IDE built with Electron for the SAPHO ecosystem. It supported CMM programming with Monaco Editor, Icarus Verilog simulation, GTKWave waveform visualisation, and the PRISM RTL Viewer. Over 25 releases (latest v4.27.10), AURORA served as the primary development environment before being succeeded by POLARIS.
           </p>
           <div class="project-links fade-up">
             <a href="https://github.com/nipscernlab/aurora" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--accent-aurora);border-color:var(--accent-aurora)">
@@ -67,11 +87,13 @@
       </div>
     </header>
 
+    <!-- Badge bar -->
     <div style="background:var(--bg-card);border-bottom:1px solid var(--border-subtle);padding:var(--sp-4) var(--container-pad)">
       <div style="max-width:var(--container-max);margin:0 auto;display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
-        <span class="badge badge-red"><i class="ph ph-windows-logo" aria-hidden="true"></i> Windows Only</span>
+        <span class="badge badge-red"><i class="ph ph-windows-logo" aria-hidden="true"></i>&nbsp;Windows Only</span>
         <span class="badge badge-red">Electron</span>
         <span class="badge badge-gray">v4.27.10 — Final Release</span>
+        <span class="badge badge-gray">25 Releases</span>
         <span class="badge badge-red">Legacy</span>
       </div>
     </div>
@@ -84,41 +106,108 @@
           <i class="ph ph-archive" aria-hidden="true"></i>
           <div>
             <div class="legacy-banner-title" data-i18n="projects.aurora.legacy">Legacy Project — succeeded by POLARIS</div>
-            <div class="legacy-banner-text">AURORA is no longer actively developed. All new development happens in <a href="polaris.html" style="color:var(--accent-polaris)">POLARIS</a>, which is cross-platform, lighter, and feature-compatible. AURORA's GitHub archive remains available for reference.</div>
+            <div class="legacy-banner-text">
+              AURORA is no longer actively developed. Version 4.27.10 is the final release and the repository is archived for historical reference. All new development happens in <a href="polaris.html" style="color:var(--accent-polaris)">POLARIS</a>, which runs on Linux and Windows with a fraction of the memory footprint.
+            </div>
           </div>
         </div>
 
+        <!-- Features -->
         <div class="fade-up" style="margin-top:var(--sp-8)">
           <div class="accent-line" style="background:var(--accent-aurora)" aria-hidden="true"></div>
-          <h2 class="heading-lg" data-i18n="projects.aurora.features.title">AURORA Features</h2>
-
+          <h2 class="heading-lg" data-i18n="projects.aurora.features.title">What AURORA Provided</h2>
+          <p class="body-sm" style="margin-top:var(--sp-3);color:var(--text-secondary)">
+            During its active development lifecycle (approximately 2021–2023), AURORA was the reference IDE for SAPHO and was used by students in the DLP discipline at UFJF. It consolidated the entire toolchain into a single Windows installer.
+          </p>
           <div class="feature-list" style="margin-top:var(--sp-6)">
             <div class="feature-item">
               <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
-              <div class="feature-text" data-i18n="projects.aurora.features.cmm">CMM programming environment</div>
+              <div>
+                <div class="feature-text" style="font-weight:600">CMM Programming Environment</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Monaco Editor with CMM syntax highlighting, bracket matching, and compiler error underlines.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-terminal" aria-hidden="true"></i></div>
+              <div>
+                <div class="feature-text" style="font-weight:600">YANC Compiler Integration</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">cmmcomp and asmcomp invoked from the UI. Build output displayed in an embedded terminal panel.</div>
+              </div>
             </div>
             <div class="feature-item">
               <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-play-circle" aria-hidden="true"></i></div>
-              <div class="feature-text" data-i18n="projects.aurora.features.verilog">Icarus Verilog simulation integration</div>
+              <div>
+                <div class="feature-text" style="font-weight:600">Icarus Verilog Simulation</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Bundled Icarus Verilog for simulation; AURORA piped the compiled .v testbench directly to iverilog and captured the resulting VCD file.</div>
+              </div>
             </div>
             <div class="feature-item">
               <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-wave-sine" aria-hidden="true"></i></div>
-              <div class="feature-text" data-i18n="projects.aurora.features.gtkwave">GTKWave waveform visualisation</div>
+              <div>
+                <div class="feature-text" style="font-weight:600">GTKWave Waveform Viewer</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">GTKWave launched as an embedded subprocess. Students could inspect digital signal timing without leaving the application.</div>
+              </div>
             </div>
             <div class="feature-item">
               <div class="feature-icon" style="background:rgba(249,115,22,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
-              <div class="feature-text" data-i18n="projects.aurora.features.prism">PRISM RTL Viewer</div>
+              <div>
+                <div class="feature-text" style="font-weight:600">PRISM RTL Viewer</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Rendered the synthesised netlist as an interactive schematic. The same PRISM engine was later ported to POLARIS.</div>
+              </div>
             </div>
             <div class="feature-item">
               <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-git-commit" aria-hidden="true"></i></div>
-              <div class="feature-text" data-i18n="projects.aurora.features.releases">25 releases — latest v4.27.10</div>
+              <div>
+                <div class="feature-text" style="font-weight:600">25 Releases Over Two Years</div>
+                <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Continuous updates from v1.0 through v4.27.10 responding to student and researcher feedback.</div>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- Release history -->
+        <div class="fade-up" style="margin-top:var(--sp-8)">
+          <h3 class="heading-sm" style="margin-bottom:var(--sp-4)">Notable Releases</h3>
+          <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);overflow:hidden">
+            <div class="release-row" style="background:var(--bg-elevated);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">
+              <span>Version</span>
+              <span class="release-note">Notes</span>
+              <span>Date</span>
+            </div>
+            <div class="release-row">
+              <span class="release-tag">v4.27.10</span>
+              <span class="release-note">Final release — PRISM stability improvements, legacy installer</span>
+              <span class="release-date">2023</span>
+            </div>
+            <div class="release-row">
+              <span class="release-tag">v4.0.0</span>
+              <span class="release-note">Major rewrite — PRISM RTL Viewer integrated natively</span>
+              <span class="release-date">2022</span>
+            </div>
+            <div class="release-row">
+              <span class="release-tag">v3.0.0</span>
+              <span class="release-note">Monaco Editor upgrade, embedded GTKWave subprocess</span>
+              <span class="release-date">2022</span>
+            </div>
+            <div class="release-row">
+              <span class="release-tag">v2.0.0</span>
+              <span class="release-note">Icarus Verilog bundled; automatic testbench simulation pipeline</span>
+              <span class="release-date">2021</span>
+            </div>
+            <div class="release-row">
+              <span class="release-tag">v1.0.0</span>
+              <span class="release-note">Initial release — Monaco Editor + YANC compiler integration</span>
+              <span class="release-date">2021</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Migration CTA -->
         <div class="info-box fade-up" style="margin-top:var(--sp-8)">
           <i class="ph ph-info" aria-hidden="true"></i>
-          <p>If you are starting a new SAPHO-based project, we recommend using <strong><a href="polaris.html" style="color:var(--accent-polaris)">POLARIS</a></strong> instead. It runs on both Linux and Windows, starts in under one second, and uses significantly less memory than AURORA's Electron runtime.</p>
+          <p>
+            Starting a new SAPHO project? Use <strong><a href="polaris.html" style="color:var(--accent-polaris)">POLARIS</a></strong> instead. It runs on both Linux and Windows, starts in under one second, uses ~60 MB of memory (vs ~300 MB for AURORA), and ships with YAWT as a built-in wave tracer — eliminating the external GTKWave dependency.
+          </p>
         </div>
 
       </div>
