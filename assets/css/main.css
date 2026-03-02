@@ -929,22 +929,33 @@ h1, h2, h3, h4, h5, h6 {
   mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 0%, transparent 100%);
 }
 
-/* LHC-style ring */
+/* LHC-style ring — outer */
 .hero-ring {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(100vmin, 680px);
-  height: min(100vmin, 680px);
+  width: min(92vmin, 620px);
+  height: min(92vmin, 620px);
   border-radius: 50%;
-  border: 1.5px solid rgba(91,156,246,0.14);
+  border: 1px solid rgba(91,156,246,0.18);
   box-shadow:
-    0 0 0 12px rgba(91,156,246,0.02),
-    0 0 0 40px rgba(91,156,246,0.01),
-    inset 0 0 100px rgba(91,156,246,0.03),
-    0 0 140px rgba(91,156,246,0.06);
-  animation: ring-rotate 32s linear infinite;
+    0 0 60px rgba(91,156,246,0.04),
+    inset 0 0 60px rgba(91,156,246,0.02);
+  animation: ring-rotate 38s linear infinite;
+}
+/* Inner concentric ring — counter-rotates slowly */
+.hero-ring-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(62vmin, 420px);
+  height: min(62vmin, 420px);
+  border-radius: 50%;
+  border: 1px solid rgba(91,156,246,0.09);
+  pointer-events: none;
+  animation: ring-rotate 55s linear infinite reverse;
 }
 
 /* Dot 1 — bright blue particle, orbits on ring top */
@@ -1645,6 +1656,74 @@ h1, h2, h3, h4, h5, h6 {
 
 .pub-list { display: flex; flex-direction: column; gap: var(--sp-4); }
 .pub-no-results { text-align: center; padding: var(--sp-20); color: var(--text-muted); }
+
+/* CERN Courier featured banner */
+.courier-banner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--sp-8);
+  align-items: center;
+  background: linear-gradient(135deg, rgba(91,156,246,0.06) 0%, rgba(91,156,246,0.02) 100%);
+  border: 1px solid rgba(91,156,246,0.2);
+  border-radius: 16px;
+  padding: var(--sp-10) var(--sp-10);
+  position: relative;
+  overflow: hidden;
+}
+.courier-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(91,156,246,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.courier-banner-icon {
+  font-size: 64px;
+  color: var(--brand);
+  opacity: 0.35;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.courier-banner-body { min-width: 0; }
+.courier-banner-stat {
+  text-align: center;
+  flex-shrink: 0;
+  padding-left: var(--sp-8);
+  border-left: 1px solid var(--border-subtle);
+}
+.courier-stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+.courier-stat-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--sp-1);
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .courier-banner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+    padding: var(--sp-7);
+  }
+  .courier-banner-icon { display: none; }
+  .courier-banner-stat {
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    padding-left: 0;
+    padding-top: var(--sp-5);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .courier-stat-number { font-size: 2rem; }
+}
 
 /* ============================================================
    Page-specific: News

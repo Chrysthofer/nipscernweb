@@ -272,6 +272,7 @@ function buildShells(scene) {
 
 // ============================================================
 // Event generation — fills InstancedMesh arrays
+// 8 distinct topologies chosen at random for visual variety
 // ============================================================
 const _pos   = new THREE.Vector3();
 const _quat  = new THREE.Quaternion();
@@ -289,29 +290,131 @@ function setInstance(inst, idx, cell, energy) {
   inst.setColorAt(idx, col);
 }
 
+/**
+ * Choose a random collision topology.
+ * Each topology returns:
+ *   jets   — array of { eta, phi, energy, isEM, sEta, sPhi }
+ *   pileup — fraction of cells receiving random pileup noise
+ *   pileupE — max pileup energy per noisy cell
+ *   thTile/thLar/thHec — energy thresholds below which cells are hidden
+ */
+function pickTopology() {
+  const r = Math.random();
+
+  if (r < 0.125) {
+    // 1 — Hadronic di-jet (back-to-back, symmetric)
+    const phi0 = -Math.PI + Math.random() * 2 * Math.PI;
+    const eta0 = (Math.random() - 0.5) * 2.0;
+    return {
+      jets: [
+        { eta: eta0,  phi: phi0,                       energy: 0.65 + Math.random() * 0.35, isEM: false, sEta: 0.16 + Math.random() * 0.08, sPhi: 0.18 + Math.random() * 0.08 },
+        { eta: -eta0 + (Math.random() - 0.5) * 0.3,
+          phi: wrapPhi(phi0 + Math.PI),                 energy: 0.55 + Math.random() * 0.35, isEM: false, sEta: 0.16 + Math.random() * 0.08, sPhi: 0.18 + Math.random() * 0.08 },
+      ],
+      pileup: 0.28, pileupE: 0.09, thTile: 0.024, thLar: 0.026, thHec: 0.020,
+    };
+  }
+  if (r < 0.250) {
+    // 2 — EM shower (electron / photon — narrow cluster mostly in LAr)
+    const nEM = Math.random() < 0.5 ? 1 : 2;
+    return {
+      jets: Array.from({ length: nEM }, () => ({
+        eta: (Math.random() - 0.5) * 2.2, phi: -Math.PI + Math.random() * 2 * Math.PI,
+        energy: 0.80 + Math.random() * 0.20, isEM: true,
+        sEta: 0.04 + Math.random() * 0.03, sPhi: 0.04 + Math.random() * 0.03,
+      })),
+      pileup: 0.07, pileupE: 0.04, thTile: 0.044, thLar: 0.016, thHec: 0.048,
+    };
+  }
+  if (r < 0.375) {
+    // 3 — Multi-jet spray (4–6 jets, mix of EM and hadronic)
+    const n = 4 + Math.floor(Math.random() * 3);
+    return {
+      jets: Array.from({ length: n }, () => ({
+        eta: (Math.random() - 0.5) * 2.8, phi: -Math.PI + Math.random() * 2 * Math.PI,
+        energy: 0.22 + Math.random() * 0.55, isEM: Math.random() < 0.28,
+        sEta: 0.13 + Math.random() * 0.10, sPhi: 0.13 + Math.random() * 0.10,
+      })),
+      pileup: 0.32, pileupE: 0.09, thTile: 0.018, thLar: 0.020, thHec: 0.015,
+    };
+  }
+  if (r < 0.500) {
+    // 4 — Forward event (high |η|, HEC-dominated, very few barrel cells)
+    return {
+      jets: [
+        { eta:  2.0 + Math.random() * 1.1, phi: -Math.PI + Math.random() * 2 * Math.PI, energy: 0.5 + Math.random() * 0.5, isEM: false, sEta: 0.22, sPhi: 0.28 },
+        { eta: -2.0 - Math.random() * 1.1, phi: -Math.PI + Math.random() * 2 * Math.PI, energy: 0.4 + Math.random() * 0.4, isEM: false, sEta: 0.22, sPhi: 0.28 },
+      ],
+      pileup: 0.11, pileupE: 0.05, thTile: 0.050, thLar: 0.044, thHec: 0.015,
+    };
+  }
+  if (r < 0.590) {
+    // 5 — Minimum bias (very few, low-energy cells scattered across the detector)
+    const n = 1 + Math.floor(Math.random() * 3);
+    return {
+      jets: Array.from({ length: n }, () => ({
+        eta: (Math.random() - 0.5) * 4.8, phi: -Math.PI + Math.random() * 2 * Math.PI,
+        energy: 0.05 + Math.random() * 0.14, isEM: Math.random() < 0.5,
+        sEta: 0.42 + Math.random() * 0.28, sPhi: 0.42 + Math.random() * 0.28,
+      })),
+      pileup: 0.05, pileupE: 0.04, thTile: 0.013, thLar: 0.013, thHec: 0.011,
+    };
+  }
+  if (r < 0.700) {
+    // 6 — Heavy-ion central collision (very high multiplicity, fills the whole detector)
+    const n = 9 + Math.floor(Math.random() * 6);
+    return {
+      jets: Array.from({ length: n }, () => ({
+        eta: (Math.random() - 0.5) * 5.4, phi: -Math.PI + Math.random() * 2 * Math.PI,
+        energy: 0.06 + Math.random() * 0.40, isEM: Math.random() < 0.42,
+        sEta: 0.28 + Math.random() * 0.28, sPhi: 0.32 + Math.random() * 0.32,
+      })),
+      pileup: 0.66, pileupE: 0.20, thTile: 0.009, thLar: 0.009, thHec: 0.007,
+    };
+  }
+  if (r < 0.820) {
+    // 7 — Single narrow hadronic jet (clean, isolated)
+    return {
+      jets: [{
+        eta: (Math.random() - 0.5) * 1.8, phi: -Math.PI + Math.random() * 2 * Math.PI,
+        energy: 0.85 + Math.random() * 0.15, isEM: false,
+        sEta: 0.08 + Math.random() * 0.06, sPhi: 0.09 + Math.random() * 0.06,
+      }],
+      pileup: 0.16, pileupE: 0.07, thTile: 0.030, thLar: 0.032, thHec: 0.038,
+    };
+  }
+  // 8 — Boosted / fat jet (one large-R jet with sub-structure)
+  const phi0 = -Math.PI + Math.random() * 2 * Math.PI;
+  const eta0 = (Math.random() - 0.5) * 1.5;
+  return {
+    jets: [
+      { eta: eta0,         phi: phi0,                  energy: 0.92, isEM: false, sEta: 0.44, sPhi: 0.46 },
+      { eta: eta0 + 0.14,  phi: wrapPhi(phi0 + 0.22),  energy: 0.62, isEM: false, sEta: 0.18, sPhi: 0.18 },
+      { eta: eta0 - 0.18,  phi: wrapPhi(phi0 - 0.20),  energy: 0.48, isEM: true,  sEta: 0.06, sPhi: 0.06 },
+    ],
+    pileup: 0.22, pileupE: 0.08, thTile: 0.019, thLar: 0.019, thHec: 0.017,
+  };
+}
+
 function generateEvent(instData) {
   const { pool, tileInst, larInst, hecInst } = instData;
-
-  // Generate 3–5 jets (mix of hadronic and EM)
-  const nJets = 3 + Math.floor(Math.random() * 3);
-  const jets  = Array.from({ length: nJets }, (_, ji) => ({
-    eta:    (Math.random() - 0.5) * 2.6,
-    phi:    -Math.PI + Math.random() * 2 * Math.PI,
-    energy: 0.45 + Math.random() * 0.55,
-    isEM:   ji > 0 && Math.random() < 0.45,   // first jet always hadronic
-  }));
+  const { jets, pileup, pileupE, thTile, thLar, thHec } = pickTopology();
 
   // ---- TileCal ----
   let ti = 0;
   for (const cell of pool.tile) {
     let E = 0;
     for (const j of jets) {
-      if (j.isEM) { E += j.energy * 0.08 * gauss(cell.eta - j.eta, 0.22) * gauss(wrapPhi(cell.phi - j.phi), 0.28); continue; }
-      E += j.energy * gauss(cell.eta - j.eta, 0.22) * gauss(wrapPhi(cell.phi - j.phi), 0.28);
+      const dPhi = wrapPhi(cell.phi - j.phi);
+      if (j.isEM) {
+        E += j.energy * 0.07 * gauss(cell.eta - j.eta, j.sEta) * gauss(dPhi, j.sPhi);
+      } else {
+        E += j.energy       * gauss(cell.eta - j.eta, j.sEta) * gauss(dPhi, j.sPhi);
+      }
     }
-    if (Math.random() < 0.38) E += Math.random() * 0.10;   // pileup
-    if (E < 0.022) continue;
-    setInstance(tileInst, ti++, cell, E);
+    if (Math.random() < pileup) E += Math.random() * pileupE;
+    if (E < thTile) continue;
+    setInstance(tileInst, ti++, cell, Math.min(E, 1));
   }
   tileInst.count = ti;
   tileInst.instanceMatrix.needsUpdate = true;
@@ -322,13 +425,15 @@ function generateEvent(instData) {
   for (const cell of pool.lar) {
     let E = 0;
     for (const j of jets) {
-      const sigma = j.isEM ? 0.08 : 0.14;
-      const w     = j.isEM ? 1.0  : 0.35;
-      E += j.energy * w * gauss(cell.eta - j.eta, sigma) * gauss(wrapPhi(cell.phi - j.phi), sigma);
+      const dPhi = wrapPhi(cell.phi - j.phi);
+      const sE   = j.isEM ? j.sEta      : j.sEta * 1.5;
+      const sP   = j.isEM ? j.sPhi      : j.sPhi * 1.5;
+      const w    = j.isEM ? 1.0         : 0.35;
+      E += j.energy * w * gauss(cell.eta - j.eta, sE) * gauss(dPhi, sP);
     }
-    if (Math.random() < 0.28) E += Math.random() * 0.07;
-    if (E < 0.028) continue;
-    setInstance(larInst, li++, cell, E * 1.1);
+    if (Math.random() < pileup * 0.62) E += Math.random() * pileupE * 0.72;
+    if (E < thLar) continue;
+    setInstance(larInst, li++, cell, Math.min(E * 1.1, 1));
   }
   larInst.count = li;
   larInst.instanceMatrix.needsUpdate = true;
@@ -340,11 +445,12 @@ function generateEvent(instData) {
     let E = 0;
     for (const j of jets) {
       const absEtaDiff = Math.abs(cell.eta) - Math.abs(j.eta);
-      E += j.energy * 0.55 * gauss(absEtaDiff, 0.30) * gauss(wrapPhi(cell.phi - j.phi), 0.35);
+      const dPhi = wrapPhi(cell.phi - j.phi);
+      E += j.energy * 0.55 * gauss(absEtaDiff, j.sEta * 1.3) * gauss(dPhi, j.sPhi * 1.3);
     }
-    if (Math.random() < 0.22) E += Math.random() * 0.08;
-    if (E < 0.020) continue;
-    setInstance(hecInst, hi++, cell, E * 0.85);
+    if (Math.random() < pileup * 0.33) E += Math.random() * pileupE * 0.52;
+    if (E < thHec) continue;
+    setInstance(hecInst, hi++, cell, Math.min(E * 0.85, 1));
   }
   hecInst.count = hi;
   hecInst.instanceMatrix.needsUpdate = true;

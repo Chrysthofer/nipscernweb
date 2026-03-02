@@ -109,9 +109,11 @@
       article.id = post.id;
       article.setAttribute('aria-labelledby', 'post-title-' + post.id);
 
-      // Image section
-      const imgDiv = document.createElement('div');
+      // Image section — wraps in <a> so clicking the image also navigates
+      const imgDiv = document.createElement('a');
+      imgDiv.href = 'post.html?id=' + post.id;
       imgDiv.className = 'news-card-image';
+      imgDiv.tabIndex = -1;         // skip-tab: the Read more link already covers keyboard nav
       imgDiv.setAttribute('aria-hidden', 'true');
       if (post.image) {
         const img = document.createElement('img');
