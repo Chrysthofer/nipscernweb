@@ -645,11 +645,17 @@
       const el = document.getElementById('view-count');
       const wrap = document.getElementById('hero-viewcount');
       if (!el || !wrap) return;
-      fetch('https://nipscern.goatcounter.com/api/v0/stats/pages?limit=1&start=2020-01-01&end=2099-12-31&filter=%2F')
+      fetch('https://nipscern.goatcounter.com/api/v0/stats/pages?start=2020-01-01&end=2099-12-31', {
+        headers: { 'Authorization': 'Bearer 16lybalelyf5defd6xtscc3jn1ndwr9wtrr6p2t08yhq3i5fct' }
+      })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (data) {
-          var count = data && data.pages && data.pages[0] && data.pages[0].count;
-          if (count != null) { el.textContent = Number(count).toLocaleString(); wrap.removeAttribute('hidden'); }
+          if (!data) return;
+          var count = data.total_hits;
+          if (count == null && Array.isArray(data.pages)) {
+            count = data.pages.reduce(function (s, p) { return s + (p.count || 0); }, 0);
+          }
+          if (count) { el.textContent = Number(count).toLocaleString(); wrap.removeAttribute('hidden'); }
         })
         .catch(function () {});
     })();

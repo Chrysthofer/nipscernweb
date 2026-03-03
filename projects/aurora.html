@@ -25,36 +25,30 @@
   <style>
     :root { --page-accent: var(--accent-aurora); }
 
-    /* Aurora Borealis — radial-gradient shifting background */
-    .aurora-bg {
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background-color: #070a12;
-      background-size: 240% 240%;
-      background-image:
-        radial-gradient(transparent 0%, transparent 22%),
-        radial-gradient(at 62% 9%,  #39ff14 0px, transparent 52%),
-        radial-gradient(at 70% 58%, #7c3aed 0px, transparent 48%),
-        radial-gradient(at 76% 48%, #00e5ff 0px, transparent 54%),
-        radial-gradient(at 22% 88%, #1de9b6 0px, transparent 50%),
-        radial-gradient(at 40% 68%, #2e1065 0px, transparent 46%),
-        radial-gradient(at 54% 78%, #060e20 0px, transparent 42%),
-        radial-gradient(at 66% 74%, #000000 0px, transparent 48%),
-        radial-gradient(at 80% 94%, #00e676 0px, transparent 54%);
-      animation: aurora-borealis 22s ease infinite;
-      opacity: 0.88;
-    }
-    @keyframes aurora-borealis {
-      0%   { background-position: center, 50% 50%, 30% 100%, 100% 10%, 21% 23%, 0% 80%,  50% 20%, 30% 30%, 50% 50%; }
-      25%  { background-position: center, 15% 70%, 45% 85%, 55% 25%, 40% 20%, 20% 40%,  70% 60%, 60% 80%, 15% 70%; }
-      50%  { background-position: center, 25% 40%, 75% 55%, 15% 15%, 70% 10%, 35%  5%,  20% 80%, 80% 40%, 25% 40%; }
-      75%  { background-position: center, 60% 80%, 20% 30%, 80% 70%, 10% 60%, 50% 90%,  40% 10%, 10% 60%, 60% 80%; }
-      100% { background-position: center, 50% 50%, 30% 100%, 100% 10%, 21% 23%, 0% 80%,  50% 20%, 30% 30%, 50% 50%; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .aurora-bg { animation: none; }
-    }
+    /* ── Night sky + Aurora hero ── */
     .project-hero { position: relative; overflow: hidden; }
 
+    .aurora-bg {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+      /* Deep blue night sky — visible through the translucent aurora bands */
+      background: linear-gradient(180deg,
+        #010511 0%,
+        #020a1d 20%,
+        #031828 45%,
+        #062040 65%,
+        #0a2a55 80%,
+        #041930 100%
+      );
+    }
+
+    /* ── Aurora SVG ribbon ── */
+    .aurora-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* ── Release table ── */
     .release-row {
       display: flex;
       align-items: center;
@@ -81,22 +75,98 @@
 
   <main id="main">
 
-    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(124,58,237,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="aurora-title">
-      <div class="aurora-bg" aria-hidden="true"></div>
-      <div class="project-hero-inner" style="position:relative;z-index:1">
-        <div class="project-hero-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)">
+    <header class="project-hero" style="background:var(--bg-0)" aria-labelledby="aurora-title">
+      <div class="aurora-bg" aria-hidden="true">
+        <svg class="aurora-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <!-- Horizontal colour gradients for the ribbons -->
+            <linearGradient id="ag1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+              <stop offset="6%"   stop-color="rgba(57,255,20,0.28)"/>
+              <stop offset="20%"  stop-color="rgba(0,229,255,0.70)"/>
+              <stop offset="36%"  stop-color="rgba(57,255,20,0.85)"/>
+              <stop offset="52%"  stop-color="rgba(29,233,182,0.80)"/>
+              <stop offset="68%"  stop-color="rgba(0,229,255,0.65)"/>
+              <stop offset="83%"  stop-color="rgba(57,255,20,0.48)"/>
+              <stop offset="94%"  stop-color="rgba(0,200,255,0.22)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <linearGradient id="ag2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
+              <stop offset="8%"   stop-color="rgba(0,180,166,0.20)"/>
+              <stop offset="26%"  stop-color="rgba(57,255,20,0.50)"/>
+              <stop offset="46%"  stop-color="rgba(0,229,255,0.58)"/>
+              <stop offset="66%"  stop-color="rgba(29,233,182,0.46)"/>
+              <stop offset="86%"  stop-color="rgba(0,200,255,0.28)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </linearGradient>
+            <!-- Vertical fade for the hanging rays -->
+            <linearGradient id="ag-rays" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="rgba(57,255,20,0.30)"/>
+              <stop offset="42%"  stop-color="rgba(0,229,255,0.12)"/>
+              <stop offset="100%" stop-color="rgba(0,229,255,0)"/>
+            </linearGradient>
+            <!-- Blur filters: tight on x, loose on y to keep ribbon narrow -->
+            <filter id="af1" x="-5%" y="-200%" width="110%" height="500%">
+              <feGaussianBlur stdDeviation="2 6"/>
+            </filter>
+            <filter id="af2" x="-5%" y="-150%" width="110%" height="400%">
+              <feGaussianBlur stdDeviation="4 9"/>
+            </filter>
+            <filter id="afr" x="-5%" y="-10%" width="110%" height="130%">
+              <feGaussianBlur stdDeviation="10 20"/>
+            </filter>
+          </defs>
+
+          <!-- Rays hanging below ribbon 1 -->
+          <path fill="url(#ag-rays)" filter="url(#afr)" opacity="0.72">
+            <animate attributeName="d" dur="22s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              values="
+                M-180,118 C60,96 240,136 480,108 C720,80 960,118 1200,94 C1320,82 1400,90 1620,84 L1620,330 C1400,338 1320,322 1200,334 C960,350 720,316 480,338 C240,360 60,326 -180,344 Z;
+                M-180,140 C60,120 240,158 480,130 C720,102 960,140 1200,116 C1320,104 1400,112 1620,106 L1620,352 C1400,360 1320,344 1200,356 C960,372 720,338 480,360 C240,382 60,348 -180,366 Z;
+                M-180,118 C60,96 240,136 480,108 C720,80 960,118 1200,94 C1320,82 1400,90 1620,84 L1620,330 C1400,338 1320,322 1200,334 C960,350 720,316 480,338 C240,360 60,326 -180,344 Z
+              "/>
+          </path>
+
+          <!-- Main ribbon 1 — the primary aurora curtain -->
+          <path fill="url(#ag1)" filter="url(#af1)" opacity="0.95">
+            <animate attributeName="d" dur="22s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              values="
+                M-180,116 C60,94 240,134 480,106 C720,78 960,116 1200,92 C1320,80 1400,88 1620,82 L1620,158 C1400,164 1320,156 1200,164 C960,178 720,144 480,166 C240,188 60,160 -180,176 Z;
+                M-180,138 C60,118 240,156 480,128 C720,100 960,138 1200,114 C1320,102 1400,110 1620,104 L1620,180 C1400,186 1320,178 1200,186 C960,200 720,166 480,188 C240,210 60,182 -180,198 Z;
+                M-180,116 C60,94 240,134 480,106 C720,78 960,116 1200,92 C1320,80 1400,88 1620,82 L1620,158 C1400,164 1320,156 1200,164 C960,178 720,144 480,166 C240,188 60,160 -180,176 Z
+              "/>
+          </path>
+
+          <!-- Secondary ribbon 2 — fainter, lower -->
+          <path fill="url(#ag2)" filter="url(#af2)" opacity="0.60">
+            <animate attributeName="d" dur="30s" repeatCount="indefinite"
+              calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              values="
+                M-180,232 C60,216 240,244 480,222 C720,200 960,232 1200,212 C1320,202 1400,214 1620,208 L1620,264 C1400,270 1320,260 1200,268 C960,282 720,256 480,272 C240,288 60,268 -180,280 Z;
+                M-180,216 C60,234 240,218 480,238 C720,258 960,222 1200,244 C1320,256 1400,242 1620,250 L1620,248 C1400,256 1320,244 1200,252 C960,266 720,240 480,256 C240,272 60,252 -180,264 Z;
+                M-180,232 C60,216 240,244 480,222 C720,200 960,232 1200,212 C1320,202 1400,214 1620,208 L1620,264 C1400,270 1320,260 1200,268 C960,282 720,256 480,272 C240,288 60,268 -180,280 Z
+              "/>
+          </path>
+        </svg>
+      </div>
+      <canvas id="aurora-stars" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none"></canvas>
+      <div class="project-hero-inner" style="position:relative;z-index:2">
+        <div class="project-hero-icon" style="background:rgba(57,255,20,0.10);color:#a5f3b0;border:1px solid rgba(57,255,20,0.25)">
           <i class="ph ph-app-window" aria-hidden="true"></i>
         </div>
         <div class="project-hero-text">
-          <div class="eyebrow fade-up">
+          <div class="eyebrow fade-up" style="color:rgba(160,230,200,0.78)">
             <i class="ph ph-archive" aria-hidden="true"></i>
             Legacy Project · Part of SAPHO
           </div>
           <h1 class="project-hero-name fade-up" id="aurora-title">
-            <span style="color:var(--accent-aurora)">AURORA</span>
+            <span style="color:#fff;text-shadow:0 0 28px rgba(57,255,20,0.65),0 0 60px rgba(0,229,255,0.35),0 0 3px rgba(255,255,255,0.9)">AURORA</span>
           </h1>
-          <p class="project-hero-fullname fade-up" data-i18n="projects.aurora.full">Windows IDE for the SAPHO Ecosystem</p>
-          <p class="project-hero-desc fade-up" data-i18n="projects.aurora.desc">
+          <p class="project-hero-fullname fade-up" style="color:rgba(205,235,255,0.90)" data-i18n="projects.aurora.full">Windows IDE for the SAPHO Ecosystem</p>
+          <p class="project-hero-desc fade-up" style="color:rgba(185,220,255,0.80)" data-i18n="projects.aurora.desc">
             AURORA was a powerful, Windows-native IDE built with Electron for the SAPHO ecosystem. It supported CMM programming with Monaco Editor, Icarus Verilog simulation, GTKWave waveform visualisation, and the PRISM RTL Viewer. Over 25 releases (latest v4.27.10), AURORA served as the primary development environment before being succeeded by POLARIS.
           </p>
           <div class="project-links fade-up">
@@ -270,6 +340,88 @@
   setTimeout(function(){ obs.disconnect(); }, 8000);
 })();
 </script>
+  <!-- Aurora stars -->
+  <script>
+  (function () {
+    var canvas = document.getElementById('aurora-stars');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Freeze SVG aurora animations if reduced-motion is preferred
+    if (reduced) {
+      document.querySelectorAll('.aurora-svg animate').forEach(function(a) {
+        var vals = a.getAttribute('values');
+        if (vals) { var first = vals.split(';')[0].trim(); a.parentElement.setAttribute('d', first); }
+        a.remove();
+      });
+    }
+    var W, H, stars = [], shooting = null, shootTimer = 4;
+    var NUM_STARS = 120;
+    function resize() {
+      var hero = canvas.parentElement;
+      W = canvas.width  = hero.offsetWidth  || window.innerWidth;
+      H = canvas.height = hero.offsetHeight || Math.round(window.innerHeight * 0.72);
+      stars = [];
+      for (var i = 0; i < NUM_STARS; i++) {
+        stars.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: 0.3 + Math.random() * 1.4,
+          base: 0.15 + Math.random() * 0.55,
+          freq: 0.3 + Math.random() * 1.1,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    function newShooter() {
+      var sx = Math.random() * W * 0.7;
+      var sy = Math.random() * H * 0.4;
+      var angle = (20 + Math.random() * 28) * Math.PI / 180;
+      var speed = 350 + Math.random() * 240;
+      return { x: sx, y: sy, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+               life: 1, tail: [] };
+    }
+    var last = 0;
+    function frame(ts) {
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var op = s.base + 0.28 * Math.sin(ts * 0.001 * s.freq * Math.PI * 2 + s.phase);
+        op = Math.max(0.04, Math.min(1, op));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(210,235,255,' + op.toFixed(2) + ')';
+        ctx.fill();
+      }
+      if (!reduced) {
+        shootTimer -= dt;
+        if (shootTimer <= 0 && !shooting) { shooting = newShooter(); shootTimer = 9 + Math.random() * 14; }
+        if (shooting) {
+          shooting.x += shooting.vx * dt;
+          shooting.y += shooting.vy * dt;
+          shooting.life -= dt * 1.2;
+          shooting.tail.push({ x: shooting.x, y: shooting.y, a: shooting.life });
+          if (shooting.tail.length > 18) shooting.tail.shift();
+          ctx.lineCap = 'round';
+          for (var j = 1; j < shooting.tail.length; j++) {
+            var p0 = shooting.tail[j-1], p1 = shooting.tail[j];
+            var a = (j / shooting.tail.length) * Math.max(0, shooting.life) * 0.7;
+            ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y);
+            ctx.strokeStyle = 'rgba(220,240,255,' + a.toFixed(2) + ')';
+            ctx.lineWidth = 1.4 * (j / shooting.tail.length);
+            ctx.stroke();
+          }
+          if (shooting.life <= 0 || shooting.x > W + 40 || shooting.y > H + 40) shooting = null;
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(frame);
+  })();
+  </script>
   <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>
