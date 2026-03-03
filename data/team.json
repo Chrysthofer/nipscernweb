@@ -10,8 +10,8 @@
     "github": "https://github.com/lucianomaf",
     "photo": "assets/images/team/luciano_manhaes_foto.jpg",
     "awards": [
-      { "year": 2025, "title": "Breakthrough Prize in Fundamental Physics", "body": "Breakthrough Prize Foundation" },
-      { "year": 2025, "title": "Most-Liked Video — SEMIC 2025 (\"Macro e Microcosmos: Fractais e a Física de Partículas\")", "body": "UFJF Graduate Research Office" },
+      { "year": 2025, "title": "<a href=\"news/post.html?id=2025-atlas-breakthrough-prize\" class=\"award-link\">Breakthrough Prize in Fundamental Physics</a>", "body": "Breakthrough Prize Foundation" },
+      { "year": 2025, "title": "<a href=\"news/post.html?id=2025-semic-fractal-video\" class=\"award-link\">Most-Liked Video — SEMIC 2025 (\"Macro e Microcosmos: Fractais e a Física de Partículas\")</a>", "body": "UFJF Graduate Research Office" },
       { "year": 2017, "title": "Best Paper — SBrT 2017", "body": "Brazilian Telecommunications Society" }
     ]
   },
@@ -50,7 +50,7 @@
     "areas": ["Deep Learning", "Particle Detection", "Calorimetry", "YAWT Wave Tracer", "POLARIS IDE", "Electrical Circuits"],
     "bio": "Undergraduate IC scholar (Bolsista CNPq) at NIPSCERN Lab (UFJF), B.Sc. student in Electrical Engineering – Electronic Systems. Contributing to the graphical interface of POLARIS IDE and the YAWT Wave Tracer — SAPHO's signal visualisation tool. Also working on particle detection in calorimetry using deep learning techniques, under supervision of Prof. Dr. Luciano Manhães de Andrade Filho.",
     "tags": [
-      { "label": "Bolsista de IC", "class": "badge-cyan" },
+      { "label": "B.Sc. Student", "class": "badge-cyan" },
       { "label": "CNPq", "class": "badge-blue" }
     ],
     "lattes": "https://lattes.cnpq.br/2506430821007651",

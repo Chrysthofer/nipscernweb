@@ -14,8 +14,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,8 +61,8 @@
       <span data-i18n="common.loading">Loading…</span>
     </div>
 
-    <!-- Cover image (populated by JS) -->
-    <div id="post-cover" style="display:none;max-width:720px;margin:0 auto var(--sp-8);padding:0 var(--container-pad)"></div>
+    <!-- Cover image (populated by JS) — negative margin-top overlaps the header bg -->
+    <div id="post-cover" style="display:none;max-width:720px;margin:0 auto var(--sp-8);margin-top:-80px;padding:0 var(--container-pad);position:relative;z-index:1"></div>
 
     <!-- Post body -->
     <div class="post-body" id="post-body" style="display:none"></div>
@@ -84,7 +83,7 @@
           Back to News
         </a>
         <div style="display:flex;align-items:center;gap:var(--sp-2)">
-          <span id="share-toast" style="font-size:var(--text-xs);color:var(--accent-cgv);display:none;font-weight:600">Link copied!</span>
+          <span id="share-toast" style="font-size:var(--text-xs);color:#39ff14;display:none;font-weight:700;text-shadow:0 0 8px rgba(57,255,20,0.6)">Link copied!</span>
           <button id="share-btn" class="btn btn-ghost btn-sm" aria-label="Copy link to this post">
             <i class="ph ph-link" aria-hidden="true"></i>
             Copy link
@@ -103,7 +102,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
 
   <script type="module">
     import { formatDate } from '../assets/js/main.js';
@@ -154,7 +169,7 @@
       document.getElementById('post-excerpt').textContent = post.excerpt;
       document.getElementById('post-header').style.display = 'block';
 
-      // Cover image
+      // Cover image — overlaps post-header so the dark bg bleeds ~15% behind the image top
       if (post.image) {
         const coverEl = document.getElementById('post-cover');
         const img = document.createElement('img');
@@ -164,6 +179,7 @@
         img.loading = 'eager';
         coverEl.appendChild(img);
         coverEl.style.display = 'block';
+        document.getElementById('post-header').classList.add('has-cover');
       }
 
       // Render body

@@ -15,8 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nipscern.com/news/">
 
-  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +66,10 @@
 
             <div class="sidebar-widget">
               <div class="sidebar-widget-title">About the Lab</div>
+              <!-- unDraw illustration — download from undraw.co, save as assets/images/undraw/undraw_news.svg -->
+              <figure style="text-align:center;margin:0 auto var(--sp-4);max-width:180px;opacity:0.65" aria-hidden="true">
+                <img src="../assets/images/undraw/undraw_news.svg" alt="" width="180" height="115" loading="lazy" style="max-width:100%;height:auto" onerror="this.parentElement.style.display='none'">
+              </figure>
               <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.65;margin-bottom:var(--sp-4)">
                 NIPSCERN is a research and development laboratory at UFJF, Brazil, working in collaboration with CERN on high energy physics and scientific computing.
               </p>
@@ -88,7 +91,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
 
   <script type="module">
     import { formatDate } from '../assets/js/main.js';

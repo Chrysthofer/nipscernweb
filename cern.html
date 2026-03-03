@@ -16,8 +16,7 @@
   <link rel="canonical" href="https://nipscern.com/cern.html">
 
   <!-- Favicon -->
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,9 +97,10 @@
     .fcc-stat-value { font-size: var(--text-2xl); font-weight: 700; color: var(--accent-cern); margin-top: var(--sp-1); font-family: var(--font-mono); }
     .fcc-stat-sub { font-size: var(--text-xs); color: var(--text-muted); margin-top: 2px; }
     .fcc-phase { display: flex; gap: var(--sp-4); margin-top: var(--sp-8); flex-wrap: wrap; }
-    .fcc-phase-card { flex: 1; min-width: 200px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--r-xl); padding: var(--sp-5); border-top: 3px solid var(--accent-cern); }
-    .fcc-phase-card.hh { border-top-color: var(--accent-sapho); }
-    .fcc-phase-name { font-size: var(--text-sm); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2); }
+    .fcc-phase-card { flex: 1; min-width: 200px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--r-xl); padding: var(--sp-5); }
+    .fcc-phase-name { font-size: var(--text-sm); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2); display: flex; align-items: center; }
+    .fcc-phase-name::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-cern); margin-right: 8px; flex-shrink: 0; }
+    .fcc-phase-card.hh .fcc-phase-name::before { background: var(--accent-sapho); }
     .fcc-phase-desc { font-size: var(--text-xs); color: var(--text-secondary); line-height: 1.6; }
     .fcc-phase-energy { font-size: var(--text-xs); font-weight: 600; color: var(--accent-cern); margin-top: var(--sp-2); font-family: var(--font-mono); }
     .fcc-phase-card.hh .fcc-phase-energy { color: var(--accent-sapho); }
@@ -265,8 +265,8 @@
     <!-- MEDIA — ATLAS overview image/video placeholder -->
     <div style="background:var(--bg-0);padding:0 var(--container-pad) var(--sp-12)">
       <div style="max-width:var(--container-max);margin:0 auto">
-        <figure class="cern-img fade-up" style="max-height:480px;background:transparent;border:none">
-          <img src="assets/images/cern/atlas-cutaway.png" alt="ATLAS detector cutaway — showing all subsystems from the beam pipe outwards" loading="lazy" style="max-height:480px;object-fit:contain;border-radius:var(--r-xl)">
+        <figure class="cern-img fade-up" style="background:var(--bg-0);border:none;overflow:hidden;border-radius:var(--r-xl)">
+          <img src="assets/images/cern/atlas-cutaway.png" alt="ATLAS detector cutaway — showing all subsystems from the beam pipe outwards" loading="lazy" style="width:100%;max-height:520px;object-fit:contain;display:block;margin:0 auto">
           <figcaption>ATLAS detector cutaway — all subsystems from inner tracking to muon spectrometer</figcaption>
         </figure>
       </div>
@@ -480,8 +480,8 @@
         </div>
 
         <div class="fade-up" style="display:flex;flex-direction:column;gap:var(--sp-4);position:sticky;top:calc(var(--nav-h) + var(--sp-4))">
-          <figure class="cern-img">
-            <img src="assets/images/cern/atlas-layers.jpg" alt="ATLAS detector layer diagram showing all subsystems" loading="lazy" style="aspect-ratio:16/9;object-fit:cover">
+          <figure class="cern-img" style="background:#000">
+            <img src="assets/images/cern/atlas-layers.jpg" alt="ATLAS detector layer diagram showing all subsystems" loading="lazy" style="aspect-ratio:4/3;object-fit:contain;width:100%;background:#000;padding:var(--sp-2)">
             <figcaption>ATLAS detector — concentric subsystem layers from beam pipe to muon spectrometer</figcaption>
           </figure>
           <figure class="cern-img">
@@ -527,7 +527,7 @@
 
         <div class="fade-up" style="display:flex;flex-direction:column;gap:var(--sp-4)">
           <figure class="cern-img">
-            <img src="assets/images/cern/atlas-trigger.png" alt="ATLAS trigger chain block diagram from 40 MHz input to permanent storage" loading="lazy" style="aspect-ratio:16/9;object-fit:contain;background:var(--bg-elevated);padding:var(--sp-3)">
+            <img src="assets/images/cern/atlas-trigger.png" alt="ATLAS trigger chain block diagram from 40 MHz input to permanent storage" loading="lazy" style="aspect-ratio:16/9;object-fit:contain;background:#cccdcd;padding:var(--sp-3)">
             <figcaption>ATLAS trigger chain — from 40 MHz LHC crossings to ~1 kHz permanent storage</figcaption>
           </figure>
           <figure class="cern-img">
@@ -550,6 +550,10 @@
           <h2 class="heading-lg" id="nipscern-contrib-title" data-i18n="cern.nipscern_contribution.title">
             NIPSCERN's Contribution to ATLAS
           </h2>
+          <!-- unDraw illustration — download from undraw.co, save as assets/images/undraw/undraw_collaboration.svg -->
+          <figure style="margin:var(--sp-6) auto 0;max-width:260px;opacity:0.65" aria-hidden="true">
+            <img src="assets/images/undraw/undraw_collaboration.svg" alt="" width="260" height="165" loading="lazy" style="max-width:100%;height:auto" onerror="this.parentElement.style.display='none'">
+          </figure>
         </div>
 
         <div class="cern-layout">
@@ -920,7 +924,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
 
   <script type="module" src="assets/js/main.js"></script>
 

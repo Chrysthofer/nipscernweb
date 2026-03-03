@@ -15,8 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nipscern.com/projects/polaris.html">
 
-  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,7 +68,7 @@
     .ws-num {
       width: 28px; height: 28px;
       border-radius: var(--r-full);
-      background: rgba(6,182,212,0.12);
+      background: rgba(147,51,234,0.12);
       color: var(--accent-polaris);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-mono);
@@ -84,9 +83,9 @@
 
   <main id="main">
 
-    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(6,182,212,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="polaris-title">
+    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(147,51,234,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="polaris-title">
       <div class="project-hero-inner">
-        <div class="project-hero-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)">
+        <div class="project-hero-icon" style="background:rgba(147,51,234,0.12);color:var(--accent-polaris)">
           <i class="ph ph-desktop" aria-hidden="true"></i>
         </div>
         <div class="project-hero-text">
@@ -141,28 +140,28 @@
             <h2 class="heading-lg">Key Features</h2>
             <div class="feature-list" style="margin-top:var(--sp-6)">
               <div class="feature-item">
-                <div class="feature-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)"><i class="ph ph-package" aria-hidden="true"></i></div>
+                <div class="feature-icon" style="background:rgba(147,51,234,0.12);color:var(--accent-polaris)"><i class="ph ph-package" aria-hidden="true"></i></div>
                 <div>
                   <div class="feature-text" style="font-weight:600">Tauri + Rust backend</div>
                   <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Native system calls with a WebView frontend. Starts in under one second. Memory footprint ~60 MB versus ~300 MB for Electron (AURORA).</div>
                 </div>
               </div>
               <div class="feature-item">
-                <div class="feature-icon" style="background:rgba(6,182,212,0.12);color:var(--accent-polaris)"><i class="ph ph-code" aria-hidden="true"></i></div>
+                <div class="feature-icon" style="background:rgba(147,51,234,0.12);color:var(--accent-polaris)"><i class="ph ph-code" aria-hidden="true"></i></div>
                 <div>
                   <div class="feature-text" style="font-weight:600">Monaco Editor</div>
                   <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">The same editor engine powering VS Code. Provides syntax highlighting, IntelliSense-style completions, and a fully featured CMM language extension.</div>
                 </div>
               </div>
               <div class="feature-item">
-                <div class="feature-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-terminal" aria-hidden="true"></i></div>
+                <div class="feature-icon" style="background:rgba(0,180,166,0.12);color:var(--accent-yanc)"><i class="ph ph-terminal" aria-hidden="true"></i></div>
                 <div>
                   <div class="feature-text" style="font-weight:600">Integrated YANC Compiler</div>
                   <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Compiles CMM → Assembly → Hex through cmmcomp and asmcomp with a click. Error diagnostics surface inline in the editor margin.</div>
                 </div>
               </div>
               <div class="feature-item">
-                <div class="feature-icon" style="background:rgba(249,115,22,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
+                <div class="feature-icon" style="background:rgba(212,160,23,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
                 <div>
                   <div class="feature-text" style="font-weight:600">PRISM RTL Viewer</div>
                   <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Embedded RTL schematic renderer. Displays the synthesised netlist graph of the designed processor without leaving the IDE.</div>
@@ -176,7 +175,7 @@
                 </div>
               </div>
               <div class="feature-item">
-                <div class="feature-icon" style="background:rgba(16,185,129,0.12);color:var(--accent-cgv)"><i class="ph ph-devices" aria-hidden="true"></i></div>
+                <div class="feature-icon" style="background:rgba(29,78,137,0.12);color:var(--accent-cgv)"><i class="ph ph-devices" aria-hidden="true"></i></div>
                 <div>
                   <div class="feature-text" style="font-weight:600">Native Linux and Windows</div>
                   <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Distributed as self-contained installers for both platforms. No runtime dependencies required on the target machine.</div>
@@ -190,8 +189,8 @@
             <div class="comparison-table">
               <div class="ct-header">
                 <div class="ct-cell" style="background:var(--bg-elevated);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:11px;color:var(--text-muted)">Feature</div>
-                <div class="ct-cell" style="background:rgba(6,182,212,0.1);color:var(--accent-polaris);font-weight:700;font-size:11px;text-align:center">POLARIS</div>
-                <div class="ct-cell" style="background:rgba(244,63,94,0.05);color:var(--accent-aurora);font-weight:700;font-size:11px;text-align:center">AURORA</div>
+                <div class="ct-cell" style="background:rgba(147,51,234,0.1);color:var(--accent-polaris);font-weight:700;font-size:11px;text-align:center">POLARIS</div>
+                <div class="ct-cell" style="background:rgba(124,58,237,0.05);color:var(--accent-aurora);font-weight:700;font-size:11px;text-align:center">AURORA</div>
               </div>
               <div class="ct-row">
                 <div class="ct-label">Framework</div>
@@ -331,7 +330,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
   <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>

@@ -23,8 +23,7 @@
   <link rel="canonical" href="https://nipscern.com/">
 
   <!-- Favicon -->
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <!-- Three.js importmap (must come before any module scripts) -->
   <script type="importmap">
@@ -85,16 +84,14 @@
          ====================================================== -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true">
-        <div class="hero-ring"></div>
-        <div class="hero-orb-wrap"><div class="hero-orb"></div></div>
-        <div class="hero-orb-wrap hero-orb-wrap--b"><div class="hero-orb"></div></div>
+        <canvas id="hero-stars"></canvas>
       </div>
       <div class="hero-content">
         <div class="hero-label" aria-label="Federal University of Juiz de Fora and CERN collaboration">
           <span class="dot" aria-hidden="true"></span>
           <span data-i18n="home.hero.label">Federal University of Juiz de Fora · CERN</span>
         </div>
-        <h1 class="hero-title" id="hero-title" data-i18n="home.hero.title">NIPSCERN</h1>
+        <h1 class="hero-title" id="hero-title">NIPS<i class="ph ph-atom hero-atom" aria-hidden="true"></i>CERN</h1>
         <p class="hero-subtitle" data-i18n="home.hero.subtitle">
           Research and Development Laboratory at UFJF, Brazil — working at the frontier of high energy physics, scientific computing, and advanced hardware systems in collaboration with CERN, Geneva.
         </p>
@@ -142,26 +139,31 @@
   </section> -->
    
 
+    <!-- unDraw illustration — download from undraw.co, save as assets/images/undraw/undraw_explore.svg -->
+    <figure style="text-align:center;margin:var(--sp-10) auto var(--sp-2);max-width:280px;opacity:0.65" aria-hidden="true">
+      <img src="assets/images/undraw/undraw_explore.svg" alt="" width="280" height="175" loading="lazy" style="max-width:100%;height:auto" onerror="this.parentElement.style.display='none'">
+    </figure>
+
     <!-- ======================================================
          STATS STRIP
          ====================================================== -->
     <div class="stats-strip" aria-label="Laboratory statistics">
       <div class="stats-strip-inner stagger-children">
         <div class="stat-item">
-          <div class="stat-number"><span class="accent">12</span>+</div>
+          <div class="stat-number"><span class="accent">20</span>+</div>
           <div class="stat-label" data-i18n="home.stats.years">Years of Research</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number"><span class="accent">40</span>+</div>
+          <div class="stat-number"><span class="accent">1200</span>+</div>
           <div class="stat-label" data-i18n="home.stats.publications">Publications</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number"><span class="accent">80</span>+</div>
-          <div class="stat-label" data-i18n="home.stats.students">Students Trained</div>
+          <div class="stat-number"><span class="accent">30</span>+</div>
+          <div class="stat-label" data-i18n="home.stats.students">IC Students</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number"><span class="accent">3</span></div>
-          <div class="stat-label" data-i18n="home.stats.experiments">CERN Experiments</div>
+          <div class="stat-number"><span class="accent">12</span>+</div>
+          <div class="stat-label" data-i18n="home.stats.countries">Collaborating Countries</div>
         </div>
       </div>
     </div>
@@ -510,12 +512,127 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
 
   <!-- CGV Preview (Three.js) -->
   <script type="module">
     import { initCGVPreview } from './assets/js/cgv-preview.js';
     document.addEventListener('DOMContentLoaded', () => initCGVPreview('cgv-canvas-wrapper'));
+  </script>
+
+  <!-- Starry sky -->
+  <script>
+  (function(){
+    var canvas = document.getElementById('hero-stars');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var W, H, stars = [], shooting = null, shootTimer = 0;
+    var NUM_STARS = 130;
+
+    function resize() {
+      var hero = canvas.parentElement.parentElement;
+      W = canvas.width  = hero.offsetWidth  || window.innerWidth;
+      H = canvas.height = hero.offsetHeight || window.innerHeight;
+      stars = [];
+      for (var i = 0; i < NUM_STARS; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 0.4 + Math.random() * 1.5,
+          base: 0.25 + Math.random() * 0.65,
+          freq: 0.3 + Math.random() * 1.2,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function newShooter() {
+      var edge = Math.random() < 0.5 ? 0 : 1;
+      var sx = edge === 0 ? Math.random() * W * 0.6 : W * 0.3 + Math.random() * W * 0.4;
+      var sy = Math.random() * H * 0.5;
+      var angle = (25 + Math.random() * 30) * Math.PI / 180;
+      var speed = 380 + Math.random() * 260;
+      return { x: sx, y: sy, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+               len: 90 + Math.random() * 60, life: 1, tail: [] };
+    }
+
+    var last = 0;
+    function frame(ts) {
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      ctx.clearRect(0, 0, W, H);
+
+      // Stars
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var t  = ts * 0.001;
+        var op = s.base + 0.28 * Math.sin(t * s.freq * Math.PI * 2 + s.phase);
+        op = Math.max(0.05, Math.min(1, op));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(210,225,255,' + op.toFixed(2) + ')';
+        ctx.fill();
+      }
+
+      if (!reduced) {
+        // Shooting star timer
+        shootTimer -= dt;
+        if (shootTimer <= 0 && !shooting) {
+          shooting = newShooter();
+          shootTimer = 8 + Math.random() * 14;
+        }
+
+        // Draw shooting star
+        if (shooting) {
+          shooting.x += shooting.vx * dt;
+          shooting.y += shooting.vy * dt;
+          shooting.life -= dt * 1.3;
+          shooting.tail.push({ x: shooting.x, y: shooting.y, a: shooting.life });
+          if (shooting.tail.length > 18) shooting.tail.shift();
+
+          ctx.lineCap = 'round';
+          for (var j = 1; j < shooting.tail.length; j++) {
+            var p0 = shooting.tail[j - 1], p1 = shooting.tail[j];
+            var a = (j / shooting.tail.length) * Math.max(0, shooting.life) * 0.75;
+            ctx.beginPath();
+            ctx.moveTo(p0.x, p0.y);
+            ctx.lineTo(p1.x, p1.y);
+            ctx.strokeStyle = 'rgba(220,235,255,' + a.toFixed(2) + ')';
+            ctx.lineWidth = 1.5 * (j / shooting.tail.length);
+            ctx.stroke();
+          }
+
+          if (shooting.life <= 0 || shooting.x > W + 40 || shooting.y > H + 40) {
+            shooting = null;
+          }
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(frame);
+  })();
   </script>
 
   <!-- Main module -->

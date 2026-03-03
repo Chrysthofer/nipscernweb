@@ -49,13 +49,25 @@ const FLAG_SVGS = {
 </svg>`,
 };
 
+const atomIcon = `<i class="ph ph-atom nav-logo-atom" aria-hidden="true"></i>`;
+
 function buildNav() {
   const path = window.location.pathname;
 
+  // Fixed active detection: home must not match subdirectory index.html files
+  function isActivePath(link) {
+    return link.paths.some(p => {
+      if (p === '/') {
+        const segs = path.split('/').filter(s => s && s !== 'index.html');
+        return segs.length === 0;
+      }
+      return path.endsWith(p);
+    });
+  }
+
   const linksHtml = NAV_LINKS.map(link => {
     const href = ROOT + link.href;
-    const isActive = link.paths.some(p => path.endsWith(p) || (p === '/' && (path === '/' || path.endsWith('/index.html'))));
-    return `<a href="${href}" class="nav-link${isActive ? ' active' : ''}" data-i18n="${link.key}">${link.key}</a>`;
+    return `<a href="${href}" class="nav-link${isActivePath(link) ? ' active' : ''}" data-i18n="${link.key}">${link.key}</a>`;
   }).join('');
 
   const langBtns = ['en', 'pt', 'fr', 'no'].map(lang => `
@@ -66,7 +78,7 @@ function buildNav() {
 
   const mobileLinksHtml = NAV_LINKS.map(link => {
     const href = ROOT + link.href;
-    const isActive = link.paths.some(p => path.endsWith(p));
+    const isActive = isActivePath(link);
     return `<a href="${href}" class="nav-mobile-link${isActive ? ' active' : ''}" data-i18n="${link.key}">${link.key}</a>`;
   }).join('');
 
@@ -74,7 +86,7 @@ function buildNav() {
     <div class="nav-inner">
       <a href="${ROOT}index.html" class="nav-logo" aria-label="NIPSCERN Home">
         <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
-        <span class="nav-logo-text">NIPSCERN</span>
+        <span class="nav-logo-text">NIPS${atomIcon}CERN</span>
       </a>
 
       <nav class="nav-links" role="navigation" aria-label="Main navigation">
@@ -96,7 +108,7 @@ function buildNav() {
       <div class="nav-mobile-header">
         <a href="${ROOT}index.html" class="nav-logo">
           <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
-          <span class="nav-logo-text">NIPSCERN</span>
+          <span class="nav-logo-text">NIPS${atomIcon}CERN</span>
         </a>
         <button id="nav-mobile-close" aria-label="Close menu" style="width:40px;height:40px;border-radius:8px;background:var(--border-subtle);border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;color:var(--text-secondary)">
           <i class="ph ph-x" style="font-size:20px" aria-hidden="true"></i>
@@ -164,7 +176,7 @@ function buildFooter() {
       <div class="footer-brand">
         <div class="footer-logo">
           <img src="${ROOT}assets/icons/icon_home_nipscern.svg" alt="NIPSCERN Logo" class="nav-logo-mark">
-          <span style="font-size:var(--text-base);font-weight:700;letter-spacing:0.06em">NIPSCERN</span>
+          <span style="font-size:var(--text-base);font-weight:700;letter-spacing:0.06em">NIPS${atomIcon}CERN</span>
         </div>
         <p class="footer-tagline" data-i18n="footer.tagline">Research and Development Laboratory at UFJF, Brazil — in collaboration with CERN, Geneva.</p>
       </div>

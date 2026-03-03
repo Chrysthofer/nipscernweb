@@ -278,6 +278,7 @@ function buildShells(scene) {
   // Position so the cone base sits at z≈8.0 and tip points outward
   zCone.position.set(0, 0, 8.21);
   zCone.userData.isZNorth = true;
+  zCone.visible = false;          // shown only when beam axis is on
   scene.add(zCone);
 }
 
@@ -552,7 +553,7 @@ export function initCGVPreview(containerId = 'cgv-canvas-wrapper') {
 
   function setBeamAxis(on) {
     beamAxisVisible = on;
-    scene.children.forEach(c => { if (c.userData.isBeamAxis) c.visible = on; });
+    scene.children.forEach(c => { if (c.userData.isBeamAxis || c.userData.isZNorth) c.visible = on; });
     btnBeam?.classList.toggle('active', on);
     btnBeam?.setAttribute('aria-pressed', String(on));
   }

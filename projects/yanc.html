@@ -15,8 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nipscern.com/projects/yanc.html">
 
-  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +23,7 @@
   <link rel="stylesheet" href="../assets/css/main.css">
 
   <style>
-    :root { --page-accent: var(--accent-yanc); --page-accent-dim: rgba(139,92,246,0.12); }
+    :root { --page-accent: var(--accent-yanc); --page-accent-dim: rgba(0,180,166,0.12); }
 
     .pipeline-flow {
       display: flex;
@@ -53,7 +52,7 @@
       width: 28px;
       height: 28px;
       border-radius: var(--r-full);
-      background: rgba(139,92,246,0.15);
+      background: rgba(0,180,166,0.15);
       color: var(--accent-yanc);
       display: flex;
       align-items: center;
@@ -130,9 +129,9 @@
 
   <main id="main">
 
-    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(139,92,246,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="yanc-title">
+    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(0,180,166,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="yanc-title">
       <div class="project-hero-inner">
-        <div class="project-hero-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)">
+        <div class="project-hero-icon" style="background:rgba(0,180,166,0.12);color:var(--accent-yanc)">
           <i class="ph ph-code-block" aria-hidden="true"></i>
         </div>
         <div class="project-hero-text">
@@ -223,8 +222,8 @@
                 </div>
               </div>
               <div class="pipeline-arrow"><i class="ph ph-arrow-down" aria-hidden="true"></i></div>
-              <div class="pipeline-node" style="border-color:rgba(139,92,246,0.4)">
-                <div class="step-badge" style="background:rgba(139,92,246,0.25)">5</div>
+              <div class="pipeline-node" style="border-color:rgba(0,180,166,0.4)">
+                <div class="step-badge" style="background:rgba(0,180,166,0.25)">5</div>
                 <div>
                   <div class="pipeline-node-title" style="color:var(--accent-yanc)">SAPHO Processor</div>
                   <div class="pipeline-node-sub">Machine code → FPGA execution or YAWT simulation</div>
@@ -238,21 +237,21 @@
             <h3 class="heading-sm" style="margin-bottom:var(--sp-5)">Toolchain Components</h3>
             <div>
               <div class="tool-row">
-                <div class="tool-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
+                <div class="tool-icon" style="background:rgba(0,180,166,0.12);color:var(--accent-yanc)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
                 <div>
                   <div class="tool-name">cmmcomp</div>
                   <div class="tool-desc">CMM high-level language compiler. Flex lexer + Bison LALR(1) parser. Emits SAPHO assembly with symbol table and error diagnostics.</div>
                 </div>
               </div>
               <div class="tool-row">
-                <div class="tool-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-binary" aria-hidden="true"></i></div>
+                <div class="tool-icon" style="background:rgba(0,180,166,0.12);color:var(--accent-yanc)"><i class="ph ph-binary" aria-hidden="true"></i></div>
                 <div>
                   <div class="tool-name">asmcomp</div>
                   <div class="tool-desc">Two-pass assembler for SAPHO instruction set. Resolves labels, encodes opcodes, outputs Intel HEX and Altera MIF formats.</div>
                 </div>
               </div>
               <div class="tool-row">
-                <div class="tool-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-yanc)"><i class="ph ph-funnel" aria-hidden="true"></i></div>
+                <div class="tool-icon" style="background:rgba(0,180,166,0.12);color:var(--accent-yanc)"><i class="ph ph-funnel" aria-hidden="true"></i></div>
                 <div>
                   <div class="tool-name">APP</div>
                   <div class="tool-desc">Auxiliary Pre-Processor. Handles <code>#define</code>, <code>#include</code>, and constant-folding before cmmcomp ingests the source.</div>
@@ -286,7 +285,7 @@
         <div class="grid grid-3 fade-up" style="gap:var(--sp-6)">
 
           <div class="bg-card" style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:var(--sp-6)">
-            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(139,92,246,0.12);color:var(--accent-yanc);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
+            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(0,180,166,0.12);color:var(--accent-yanc);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
               <i class="ph ph-plug" aria-hidden="true"></i>
             </div>
             <h3 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--sp-2)">SAPHO Integration</h3>
@@ -296,7 +295,7 @@
           </div>
 
           <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:var(--sp-6)">
-            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(139,92,246,0.12);color:var(--accent-yanc);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
+            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(0,180,166,0.12);color:var(--accent-yanc);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
               <i class="ph ph-wrench" aria-hidden="true"></i>
             </div>
             <h3 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--sp-2)">Build Dependencies</h3>
@@ -306,7 +305,7 @@
           </div>
 
           <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:var(--sp-6)">
-            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(249,115,22,0.12);color:var(--accent-sapho);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
+            <div style="width:40px;height:40px;border-radius:var(--r-md);background:rgba(212,160,23,0.12);color:var(--accent-sapho);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:var(--sp-4)">
               <i class="ph ph-graduation-cap" aria-hidden="true"></i>
             </div>
             <h3 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--sp-2)">Teaching Use</h3>
@@ -352,7 +351,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
   <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>

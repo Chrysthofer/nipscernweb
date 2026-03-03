@@ -3,12 +3,12 @@
     "id": "pub-2025-enmc-fractal",
     "title": "Implementação de Fractal em FPGA Usando o Processador Soft-Core SAPHO",
     "authors": ["Andrade Filho, L. M.", "Afonso, C. A. A.", "Kapisch, E. B.", "Castro, A. L. B.", "Rimes, S. M.", "Libotte, G. B."],
-    "journal": "Seminário de Computação (SEMIC) — ENMC 2025",
+    "journal": "Encontro Nacional de Modelagem Computacional— ENMC 2025",
     "year": 2025,
     "type": "conference",
     "doi": null,
     "abstract": "O uso de fractais no processamento e na análise de dados tem ganhado destaque em diversas áreas científicas e tecnológicas. Neste trabalho, é apresentada a implementação do fractal do Conjunto de Mandelbrot utilizando o processador SAPHO em FPGA, explorando sua arquitetura reconfigurável para viabilizar o processamento rápido e eficiente de imagens fractais em tempo real. Além disso, propõem-se otimizações no código Assembly gerado para o SAPHO, que resultam em um ganho de desempenho de aproximadamente 25% em relação à implementação padrão.",
-    "tags": ["SAPHO", "FPGA", "Fractal", "Mandelbrot", "SEMIC", "ENMC"],
+    "tags": ["SAPHO", "FPGA", "Fractal", "Mandelbrot", "ENMC", "ENMC"],
     "pdf": "publications/articles/ENMC_2025_Fractal.pdf"
   },
   {
@@ -20,8 +20,7 @@
     "type": "article",
     "doi": "10.1088/1748-0221/19/01/P01012",
     "abstract": "We present a distributed control system architecture designed for the Phase-II upgrade of the ATLAS TileCal detector readout electronics. The proposed system leverages FPGA-based modules communicating over a custom low-latency protocol, achieving sub-microsecond trigger latency while providing robust monitoring and calibration capabilities. Performance benchmarks on prototype hardware demonstrate compliance with LHC Run 4 requirements.",
-    "tags": ["ATLAS", "TileCal", "FPGA", "DCS", "Phase-II Upgrade"],
-    "pdf": "publications/articles/pub-2024-tilecal-dcs.pdf"
+    "tags": ["ATLAS", "TileCal", "FPGA", "DCS", "Phase-II Upgrade"]
   },
   {
     "id": "pub-2023-cgv-web",
@@ -32,8 +31,7 @@
     "type": "conference",
     "doi": "10.1109/NSSMICRTSD49126.2023.10338159",
     "abstract": "CGV-WEB is an online calorimeter event display developed at NIPSCERN/UFJF for the ATLAS experiment at CERN. Built on a Rust/WebAssembly core with a Three.js rendering frontend, it allows physicists and students worldwide to visualise three-dimensional energy deposits in the ATLAS calorimeter system directly in a web browser. This paper describes the software architecture, geometry representation format, and performance characteristics of the system.",
-    "tags": ["CGV-WEB", "ATLAS", "Calorimeter", "WebAssembly", "Three.js", "Event Display"],
-    "pdf": "publications/articles/pub-2023-cgv-web.pdf"
+    "tags": ["CGV-WEB", "ATLAS", "Calorimeter", "WebAssembly", "Three.js", "Event Display"]
   },
   {
     "id": "pub-2023-sapho-architecture",
@@ -44,8 +42,7 @@
     "type": "conference",
     "doi": "10.1109/SBESC60064.2023.10319876",
     "abstract": "This paper presents the SAPHO framework — a scalable, open-source hardware architecture and toolchain designed to lower the barrier to processor design experimentation for undergraduate and graduate students. SAPHO bundles the YANC compiler toolchain, the POLARIS IDE, and hardware simulation tools into a cohesive environment that runs on both Windows and Linux. We demonstrate its use in three processor design exercises that are now part of the Computer Architecture curriculum at UFJF.",
-    "tags": ["SAPHO", "YANC", "POLARIS", "Processor Design", "Education", "Hardware"],
-    "pdf": "publications/articles/pub-2023-sapho-architecture.pdf"
+    "tags": ["SAPHO", "YANC", "POLARIS", "Processor Design", "Education", "Hardware"]
   },
   {
     "id": "tcc-2024-polaris-ide",
@@ -56,8 +53,7 @@
     "type": "tcc",
     "doi": null,
     "abstract": "Este trabalho descreve o design e implementação do POLARIS, uma IDE gráfica multiplataforma para o ecossistema SAPHO construída com o framework Tauri e a linguagem Rust. O trabalho detalha a integração do Monaco Editor, do PRISM RTL Viewer e do YAWT Wave Tracer, e apresenta uma comparação de desempenho com o predecessor AURORA baseado em Electron, demonstrando redução significativa no tempo de inicialização e no consumo de memória.",
-    "tags": ["POLARIS", "Tauri", "Rust", "IDE", "SAPHO", "Multiplataforma"],
-    "pdf": "publications/tcc/tcc-2024-polaris-ide.pdf"
+    "tags": ["POLARIS", "Tauri", "Rust", "IDE", "SAPHO", "Multiplataforma"]
   },
   {
     "id": "tcc-2023-yanc-optimisations",
@@ -68,7 +64,6 @@
     "type": "tcc",
     "doi": null,
     "abstract": "This thesis presents the design and implementation of two optimisation passes for the YANC (Yet Another Compiler) toolchain: dead code elimination and constant folding for the CMM high-level language targeting SAPHO processor architectures. Benchmark results on a suite of representative programs show an average 18% reduction in generated instruction count and a 12% reduction in simulated execution cycles.",
-    "tags": ["YANC", "Compiler", "Optimisation", "CMM", "SAPHO"],
-    "pdf": "publications/tcc/tcc-2023-yanc-optimisations.pdf"
+    "tags": ["YANC", "Compiler", "Optimisation", "CMM", "SAPHO"]
   }
 ]

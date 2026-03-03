@@ -15,8 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nipscern.com/about.html">
 
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,6 +73,11 @@
             <i class="ph ph-star" aria-hidden="true"></i>
             <p>A defining aspect of NIPSCERN is the direct involvement of undergraduate students in real CERN experiments — working side by side with international researchers on active physics analyses and detector instrumentation projects.</p>
           </div>
+
+          <!-- unDraw illustration — download from undraw.co, save as assets/images/undraw/undraw_research.svg -->
+          <figure style="text-align:center;margin:var(--sp-10) auto 0;max-width:300px;opacity:0.65" aria-hidden="true">
+            <img src="assets/images/undraw/undraw_research.svg" alt="" width="300" height="190" loading="lazy" style="max-width:100%;height:auto" onerror="this.parentElement.style.display='none'">
+          </figure>
         </div>
       </div>
     </section>
@@ -112,6 +116,11 @@
             Researchers, engineers, and students working together across disciplines.
           </p>
         </div>
+
+        <!-- unDraw illustration — download from undraw.co, save as assets/images/undraw/undraw_team.svg -->
+        <figure style="text-align:center;margin:0 auto var(--sp-8);max-width:280px;opacity:0.6" aria-hidden="true">
+          <img src="assets/images/undraw/undraw_team.svg" alt="" width="280" height="175" loading="lazy" style="max-width:100%;height:auto" onerror="this.parentElement.style.display='none'">
+        </figure>
 
         <div class="grid grid-auto stagger-children" id="team-grid">
           <!-- Populated by about-page script below -->
@@ -164,6 +173,14 @@
             </div>
             <div class="infra-caption" data-i18n="about.infrastructure.items.lab">Collaborative laboratory space at UFJF</div>
           </div>
+        </div>
+
+        <!-- Lab history note -->
+        <div class="info-box fade-up" style="margin-top:var(--sp-6);display:flex;gap:var(--sp-4);align-items:flex-start;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:var(--sp-5)">
+          <i class="ph ph-clock-counter-clockwise" aria-hidden="true" style="font-size:24px;color:var(--text-muted);flex-shrink:0;margin-top:2px"></i>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7;margin:0">
+            <strong style="color:var(--text-primary)">Formerly LAPTEL</strong> — The group was originally known as <em>LAPTEL</em> (Laboratório de Processamento de Sinais e Telecomunicações) before being renamed <em>NIPS</em> (Núcleo de Instrumentação e Processamento de Sinais) and later <em>NIPSCERN</em> following the formalization of the CERN collaboration. Our laboratory is located in the <strong style="color:var(--text-primary)">PPEE</strong> — Programa de Pós-Graduação em Engenharia Elétrica — building at UFJF.
+          </p>
         </div>
 
         <!-- 360° Tour placeholder -->
@@ -223,7 +240,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
 
   <!-- Team loader -->
   <script type="module">

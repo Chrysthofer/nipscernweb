@@ -15,8 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nipscern.com/projects/aurora.html">
 
-  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/icons/icon_home_nipscern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +24,36 @@
 
   <style>
     :root { --page-accent: var(--accent-aurora); }
+
+    /* Aurora Borealis — radial-gradient shifting background */
+    .aurora-bg {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-color: #070a12;
+      background-size: 240% 240%;
+      background-image:
+        radial-gradient(transparent 0%, transparent 22%),
+        radial-gradient(at 62% 9%,  #39ff14 0px, transparent 52%),
+        radial-gradient(at 70% 58%, #7c3aed 0px, transparent 48%),
+        radial-gradient(at 76% 48%, #00e5ff 0px, transparent 54%),
+        radial-gradient(at 22% 88%, #1de9b6 0px, transparent 50%),
+        radial-gradient(at 40% 68%, #2e1065 0px, transparent 46%),
+        radial-gradient(at 54% 78%, #060e20 0px, transparent 42%),
+        radial-gradient(at 66% 74%, #000000 0px, transparent 48%),
+        radial-gradient(at 80% 94%, #00e676 0px, transparent 54%);
+      animation: aurora-borealis 22s ease infinite;
+      opacity: 0.88;
+    }
+    @keyframes aurora-borealis {
+      0%   { background-position: center, 50% 50%, 30% 100%, 100% 10%, 21% 23%, 0% 80%,  50% 20%, 30% 30%, 50% 50%; }
+      25%  { background-position: center, 15% 70%, 45% 85%, 55% 25%, 40% 20%, 20% 40%,  70% 60%, 60% 80%, 15% 70%; }
+      50%  { background-position: center, 25% 40%, 75% 55%, 15% 15%, 70% 10%, 35%  5%,  20% 80%, 80% 40%, 25% 40%; }
+      75%  { background-position: center, 60% 80%, 20% 30%, 80% 70%, 10% 60%, 50% 90%,  40% 10%, 10% 60%, 60% 80%; }
+      100% { background-position: center, 50% 50%, 30% 100%, 100% 10%, 21% 23%, 0% 80%,  50% 20%, 30% 30%, 50% 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-bg { animation: none; }
+    }
+    .project-hero { position: relative; overflow: hidden; }
 
     .release-row {
       display: flex;
@@ -52,9 +81,10 @@
 
   <main id="main">
 
-    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(244,63,94,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="aurora-title">
-      <div class="project-hero-inner">
-        <div class="project-hero-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)">
+    <header class="project-hero" style="background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(124,58,237,0.07) 0%, transparent 70%), var(--bg-0)" aria-labelledby="aurora-title">
+      <div class="aurora-bg" aria-hidden="true"></div>
+      <div class="project-hero-inner" style="position:relative;z-index:1">
+        <div class="project-hero-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)">
           <i class="ph ph-app-window" aria-hidden="true"></i>
         </div>
         <div class="project-hero-text">
@@ -121,42 +151,42 @@
           </p>
           <div class="feature-list" style="margin-top:var(--sp-6)">
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)"><i class="ph ph-file-code" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">CMM Programming Environment</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Monaco Editor with CMM syntax highlighting, bracket matching, and compiler error underlines.</div>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-terminal" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)"><i class="ph ph-terminal" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">YANC Compiler Integration</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">cmmcomp and asmcomp invoked from the UI. Build output displayed in an embedded terminal panel.</div>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-play-circle" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)"><i class="ph ph-play-circle" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">Icarus Verilog Simulation</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Bundled Icarus Verilog for simulation; AURORA piped the compiled .v testbench directly to iverilog and captured the resulting VCD file.</div>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-wave-sine" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)"><i class="ph ph-wave-sine" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">GTKWave Waveform Viewer</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">GTKWave launched as an embedded subprocess. Students could inspect digital signal timing without leaving the application.</div>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(249,115,22,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(212,160,23,0.12);color:var(--accent-sapho)"><i class="ph ph-graph" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">PRISM RTL Viewer</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Rendered the synthesised netlist as an interactive schematic. The same PRISM engine was later ported to POLARIS.</div>
               </div>
             </div>
             <div class="feature-item">
-              <div class="feature-icon" style="background:rgba(244,63,94,0.12);color:var(--accent-aurora)"><i class="ph ph-git-commit" aria-hidden="true"></i></div>
+              <div class="feature-icon" style="background:rgba(124,58,237,0.12);color:var(--accent-aurora)"><i class="ph ph-git-commit" aria-hidden="true"></i></div>
               <div>
                 <div class="feature-text" style="font-weight:600">25 Releases Over Two Years</div>
                 <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:2px">Continuous updates from v1.0 through v4.27.10 responding to student and researcher feedback.</div>
@@ -223,7 +253,23 @@
   </div>
   <script>(function(){var p=HTMLAudioElement.prototype.play;HTMLAudioElement.prototype.play=function(){return Promise.resolve();};setTimeout(function(){HTMLAudioElement.prototype.play=p;},3000);})();</script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script>new VLibras.Widget('https://vlibras.gov.br/app');</script><script>
+(function(){
+  var obs = new MutationObserver(function(){
+    var panel = document.querySelector('[vw-plugin-wrapper]');
+    if (panel && panel.innerHTML.trim().length > 10) {
+      panel.style.display = 'none';
+      obs.disconnect();
+      var btn = document.querySelector('[vw-access-button]');
+      if (btn) btn.addEventListener('click', function(){
+        panel.style.display = panel.style.display === 'none' ? '' : 'none';
+      }, { once: false });
+    }
+  });
+  obs.observe(document.body, { subtree: true, childList: true, characterData: true });
+  setTimeout(function(){ obs.disconnect(); }, 8000);
+})();
+</script>
   <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>
